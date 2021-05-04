@@ -1,7 +1,7 @@
 import axios from "axios";
-import Config from "react-native-config";
+import config from "../../config.json";
 
-const BASE_URL = Config.BASE_URL;
+const BASE_URL = config.API.BASE_URL;
 
 export const getAllPlants = async () => {
   try {

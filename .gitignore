@@ -57,3 +57,5 @@ web-build/
 **/.env*
 
 **/config.json
+
+**/Info.plist

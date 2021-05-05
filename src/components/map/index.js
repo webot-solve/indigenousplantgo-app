@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
 import { Marker, Callout } from "react-native-maps";
+import { PlantMarker } from "../../icons/Plant";
 
 export default function index({ region, markers, mapRef, showDetail }) {
   return (
@@ -23,8 +24,14 @@ export default function index({ region, markers, mapRef, showDetail }) {
                   longitude: marker.longitude,
                 }}
               >
+                <PlantMarker />
                 <Callout onPress={() => showDetail(marker.id)}>
-                  <Text>{marker.name}</Text>
+                  <View style={{ minWidth: 80 }}>
+                    <Text style={{ width: "100%", textAlign: "center" }}>
+                      {marker.name}
+                    </Text>
+                    <Text>See Info</Text>
+                  </View>
                 </Callout>
               </Marker>
             ))

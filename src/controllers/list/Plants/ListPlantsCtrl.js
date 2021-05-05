@@ -4,13 +4,49 @@ import { getAllPlants } from "../../../network";
 
 export default function ListPlantsCtrl({ navigation }) {
   const [plants, setPlants] = useState([]);
+  const [locations, setLocations] = useState([]);
 
   useEffect(() => {
     queryPlants();
   }, []);
 
-  const showDetail = (plant) => {
-    navigation.navigate("Plant Detail", plant);
+  useEffect(() => {
+    delegateLocations();
+  }, [plants]);
+
+  const delegateLocations = () => {
+    if (!plants) return;
+    if (plants && plants.length < 1) return;
+    let locations_ = [];
+
+    plants.forEach((plant) => {
+      const plantName = plant.plant_name;
+      const plantLocations = plant.locations;
+      const plantId = plant._id;
+
+      plantLocations.forEach((location) => {
+        const locationObj = {
+          latitude: location.latitude,
+          longitude: location.longitude,
+          name: plantName,
+          id: plantId,
+          type: "plant",
+        };
+
+        locations_ = [...locations_, locationObj];
+        console.log(locationObj);
+      });
+    });
+
+    setLocations(locations_);
+  };
+
+  const showDetail = (id) => {
+    if (!id) return;
+    let foundPlant = plants.filter((plant) => plant._id === id)[0];
+    if (!foundPlant) return;
+
+    navigation.navigate("Plant Detail", foundPlant);
   };
 
   const queryPlants = async () => {
@@ -19,5 +55,7 @@ export default function ListPlantsCtrl({ navigation }) {
     setPlants(result);
   };
 
-  return <ListPlants plants={plants} showDetail={showDetail} />;
+  return (
+    <ListPlants plants={plants} locations={locations} showDetail={showDetail} />
+  );
 }

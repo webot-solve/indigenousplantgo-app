@@ -5,6 +5,10 @@ export default function PlantDetailCtrl({ plant, navigation }) {
   const [locations, setLocations] = useState([]);
 
   useEffect(() => {
+    navigation.setOptions({ headerTitle: plant.plant_name });
+  }, []);
+
+  useEffect(() => {
     if (typeof plant === "object" && Object.keys(plant).length > 2) {
       delegateLocations();
     }

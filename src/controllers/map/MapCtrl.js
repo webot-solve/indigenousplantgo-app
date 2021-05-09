@@ -17,7 +17,7 @@ export default function MapCtrl({ markers, showDetail }) {
 
   useEffect(() => {
     if (markers && markers.length > 1) {
-      mapRef.current.fitToElements(true);
+      if (mapRef.current) mapRef.current.fitToElements(true);
     }
   }, [markers]);
 

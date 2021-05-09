@@ -4,7 +4,13 @@ import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
 import { Marker, Callout } from "react-native-maps";
 import { PlantMarker } from "../../icons/Plant";
 
-export default function index({ region, markers, mapRef, showDetail }) {
+export default function index({
+  region,
+  markers,
+  mapRef,
+  showDetail,
+  currentLocation,
+}) {
   return (
     <View style={styles.container}>
       {markers &&
@@ -39,8 +45,19 @@ export default function index({ region, markers, mapRef, showDetail }) {
                 </Marker>
               ))
             : null}
+          {currentLocation &&
+          typeof currentLocation === "object" &&
+          Object.keys(currentLocation).length > 1 ? (
+            <Marker
+              coordinate={{
+                latitude: currentLocation.coords.latitude,
+                longitude: currentLocation.coords.longitude,
+              }}
+            />
+          ) : null}
         </MapView>
       ) : null}
+      <Text>{JSON.stringify(currentLocation)}</Text>
     </View>
   );
 }

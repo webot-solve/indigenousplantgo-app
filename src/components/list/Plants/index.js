@@ -14,29 +14,13 @@ export default function ListPlants({ plants, showDetail, locations }) {
       <View style={styles.mapContainer}>
         <MapCtrl markers={locations} showDetail={showDetail} />
       </View>
-      <FlatList
-        style={styles.flatList}
-        keyExtractor={(plant) => plant._id}
-        data={plants}
-        renderItem={({ item }) => {
-          return (
-            <TouchableOpacity
-              onPress={() => {
-                showDetail(item);
-              }}
-            >
-              <Text>{item.plant_name}</Text>
-            </TouchableOpacity>
-          );
-        }}
-      />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   mapContainer: {
-    height: 400,
+    height: "100%",
   },
   container: {
     flex: 1,

@@ -18,8 +18,14 @@ const LOCATION_SETTINGS = {
 export default function MapCtrl({ markers, showDetail }) {
   const mapRef = useRef();
   const [initialRegion, setInitialRegion] = useState(BCIT_REGION);
+  const [region, setRegion] = useState(null);
   const [currentLocation, setCurrentLocation] = useState(null);
+  const [currentRegion, setCurrentRegion] = useState(null);
   const [directive, setDirective] = useState("");
+
+  useEffect(() => {
+    delegateCurrentRegion();
+  }, [currentLocation]);
 
   useEffect(() => {
     if (markers && markers.length > 1) {
@@ -33,6 +39,24 @@ export default function MapCtrl({ markers, showDetail }) {
       await pollLocation(LOCATION_SETTINGS);
     })();
   }, []);
+
+  const delegateCurrentRegion = () => {
+    if (
+      currentLocation &&
+      typeof currentLocation === "object" &&
+      currentLocation !== null &&
+      Object.keys(currentLocation).length > 1
+    ) {
+      const currentRegion_ = {
+        latitude: currentLocation.coords.latitude,
+        longitude: currentLocation.coords.longitude,
+        latitudeDelta: 0.01,
+        longitudeDelta: 0.01,
+      };
+
+      setCurrentRegion(currentRegion_);
+    }
+  };
 
   const requestLocation = async () => {
     let { status } = await Location.requestForegroundPermissionsAsync();
@@ -54,6 +78,11 @@ export default function MapCtrl({ markers, showDetail }) {
     });
   };
 
+  const navigateRegionToUser = () => {
+    if (!currentLocation) return;
+    if (mapRef.current) mapRef.current.animateToRegion(currentRegion, 1000);
+  };
+
   return (
     <Map
       region={initialRegion}
@@ -61,6 +90,7 @@ export default function MapCtrl({ markers, showDetail }) {
       mapRef={mapRef}
       showDetail={showDetail}
       currentLocation={currentLocation}
+      navigateRegionToUser={navigateRegionToUser}
     />
   );
 }

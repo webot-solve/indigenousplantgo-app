@@ -1,8 +1,9 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
 import { Marker, Callout } from "react-native-maps";
 import { PlantMarker } from "../../icons/Plant";
+import { NavigatorDefault } from "../../icons/Navigator";
 
 export default function index({
   region,
@@ -10,6 +11,7 @@ export default function index({
   mapRef,
   showDetail,
   currentLocation,
+  navigateRegionToUser,
 }) {
   return (
     <View style={styles.container}>
@@ -53,16 +55,84 @@ export default function index({
                 latitude: currentLocation.coords.latitude,
                 longitude: currentLocation.coords.longitude,
               }}
-            />
+            >
+              <View style={styles.markerShadow}>
+                <View style={styles.marker}></View>
+              </View>
+            </Marker>
           ) : null}
         </MapView>
       ) : null}
       <Text>{JSON.stringify(currentLocation)}</Text>
+
+      <View style={styles.locator}>
+        <View style={styles.locatorShadow}>
+          <TouchableOpacity
+            style={styles.locatorButton}
+            onPress={() => navigateRegionToUser()}
+          >
+            <NavigatorDefault
+              style={{ transform: [{ translateX: -1 }, { translateY: 1 }] }}
+            />
+          </TouchableOpacity>
+        </View>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  marker: {
+    height: 20,
+    width: 20,
+    backgroundColor: "dodgerblue",
+    borderRadius: 20 / 2,
+    borderWidth: 3,
+    borderColor: "white",
+    overflow: "hidden",
+  },
+  locator: {
+    height: 50,
+    width: 50,
+    position: "absolute",
+    bottom: 20,
+    right: 20,
+  },
+  locatorShadow: {
+    height: 50,
+    width: 50,
+    backgroundColor: "transparent",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 0.5,
+    elevation: 3,
+  },
+  locatorButton: {
+    borderRadius: 50 / 2,
+    height: 50,
+    width: 50,
+    backgroundColor: "white",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  markerShadow: {
+    height: 25,
+    width: 25,
+    backgroundColor: "transparent",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 0.5,
+    elevation: 3,
+  },
   container: {
     ...StyleSheet.absoluteFillObject,
   },

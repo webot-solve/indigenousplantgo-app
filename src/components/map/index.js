@@ -3,6 +3,8 @@ import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
 import { Marker, Callout } from "react-native-maps";
 import { PlantMarker } from "../../icons/Plant";
+import { WaypointMarker } from "../../icons/Waypoint";
+import { InfoActive } from "../../icons/Info";
 import { NavigatorDefault } from "../../icons/Navigator";
 
 export default function index({
@@ -12,7 +14,55 @@ export default function index({
   showDetail,
   currentLocation,
   navigateRegionToUser,
+  resourceType,
 }) {
+  const renderCallOut = (marker) => {
+    switch (resourceType) {
+      case "plants":
+        return (
+          <>
+            <PlantMarker />
+            <Callout
+              style={styles.callout}
+              onPress={() => showDetail(marker.id)}
+            >
+              <View style={{ minWidth: 80 }}>
+                <Text style={styles.calloutHead}>{marker.name}</Text>
+                <Text style={styles.calloutSubHead}>
+                  {marker.scientificName}
+                </Text>
+                <View style={styles.infoContainer}>
+                  <InfoActive />
+                  <Text style={styles.calloutCTA}>View Plant</Text>
+                </View>
+              </View>
+            </Callout>
+          </>
+        );
+      case "waypoints":
+        return (
+          <>
+            <WaypointMarker />
+            <Callout
+              style={styles.callout}
+              onPress={() => showDetail(marker.id)}
+            >
+              <View style={{ minWidth: 80 }}>
+                <Text style={{ ...styles.calloutHead, marginBottom: 7 }}>
+                  {marker.name}
+                </Text>
+                <View style={styles.infoContainer}>
+                  <InfoActive />
+                  <Text style={styles.calloutCTA}>View Waypoint</Text>
+                </View>
+              </View>
+            </Callout>
+          </>
+        );
+      default:
+        break;
+    }
+  };
   return (
     <View style={styles.container}>
       {markers &&
@@ -35,15 +85,7 @@ export default function index({
                     longitude: marker.longitude,
                   }}
                 >
-                  <PlantMarker />
-                  <Callout onPress={() => showDetail(marker.id)}>
-                    <View style={{ minWidth: 80 }}>
-                      <Text style={{ width: "100%", textAlign: "center" }}>
-                        {marker.name}
-                      </Text>
-                      <Text>See Info</Text>
-                    </View>
-                  </Callout>
+                  {renderCallOut(marker)}
                 </Marker>
               ))
             : null}
@@ -63,7 +105,6 @@ export default function index({
           ) : null}
         </MapView>
       ) : null}
-      <Text>{JSON.stringify(currentLocation)}</Text>
 
       <View style={styles.locator}>
         <View style={styles.locatorShadow}>
@@ -97,6 +138,36 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 20,
     right: 20,
+  },
+  callout: {
+    flex: 1,
+    position: "relative",
+    padding: 10,
+    maxWidth: 175,
+  },
+  calloutHead: {
+    width: "100%",
+    textAlign: "center",
+    fontWeight: "bold",
+    fontSize: 17,
+    color: "#333",
+  },
+  calloutSubHead: {
+    paddingTop: 3,
+    paddingBottom: 3,
+    textAlign: "center",
+    fontStyle: "italic",
+  },
+  infoContainer: {
+    display: "flex",
+    justifyContent: "center",
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  calloutCTA: {
+    textAlign: "center",
+    color: "#0862F9",
+    marginLeft: 3,
   },
   locatorShadow: {
     height: 50,

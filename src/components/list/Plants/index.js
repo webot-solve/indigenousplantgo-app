@@ -1,18 +1,16 @@
 import React from "react";
-import {
-  FlatList,
-  TouchableOpacity,
-  Text,
-  View,
-  StyleSheet,
-} from "react-native";
+import { View, StyleSheet } from "react-native";
 import MapCtrl from "../../../controllers/map/MapCtrl";
 
 export default function ListPlants({ plants, showDetail, locations }) {
   return (
     <View>
       <View style={styles.mapContainer}>
-        <MapCtrl markers={locations} showDetail={showDetail} />
+        <MapCtrl
+          resourceType="plants"
+          markers={locations}
+          showDetail={showDetail}
+        />
       </View>
     </View>
   );

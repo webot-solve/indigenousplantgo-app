@@ -2,10 +2,10 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import ListWaypointsCtrl from "../../controllers/list/Waypoints/ListWaypointsCtrl";
 
-export default function ListWaypoints() {
+export default function ListWaypoints({ navigation }) {
   return (
     <View>
-      <ListWaypointsCtrl />
+      <ListWaypointsCtrl navigation={navigation} />
     </View>
   );
 }

@@ -13,7 +13,7 @@ import DetailPlant from "../screens/Detail/DetailPlant";
 
 // Screens - WAYPOINTS
 import ListWaypoints from "../screens/List/ListWaypoints";
-import DetailWaypoint from "../screens/Detail/DetailPlant";
+import DetailWaypoint from "../screens/Detail/DetailWaypoint";
 
 // Screens - HOME
 import Home from "../screens/Home/Home";

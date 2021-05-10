@@ -2,7 +2,11 @@ import React from "react";
 import { StyleSheet, View, TextInput } from "react-native";
 import { SearchDefault } from "../../../icons/Search";
 
-export default function SearchInput({ searchQuery, setSearchQuery }) {
+export default function SearchInput({
+  resourceType,
+  searchQuery,
+  setSearchQuery,
+}) {
   return (
     <View style={styles.container}>
       <View>
@@ -11,7 +15,10 @@ export default function SearchInput({ searchQuery, setSearchQuery }) {
           <TextInput
             onChangeText={(text) => setSearchQuery(text)}
             placeholderTextColor={"grey"}
-            placeholder="Enter cryptocurrency symbol or name"
+            placeholder={`Search by ${resourceType.substring(
+              0,
+              resourceType.length - 1
+            )} name, category, or tag.`}
             style={styles.input}
             autoFocus={true}
             value={searchQuery}

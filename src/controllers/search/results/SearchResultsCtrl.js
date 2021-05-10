@@ -34,6 +34,7 @@ export default function SearchResultsCtrl({ resourceType }) {
 
     if (result.error) return console.log("Error fetching resources");
     setResources(result);
+    setFilteredResources(result);
   };
 
   const filterResources = () => {
@@ -95,6 +96,10 @@ export default function SearchResultsCtrl({ resourceType }) {
   };
 
   return (
-    <SearchResults setter={syncQuery} filteredResources={filteredResources} />
+    <SearchResults
+      setter={syncQuery}
+      filteredResources={filteredResources}
+      resourceType={resourceType}
+    />
   );
 }

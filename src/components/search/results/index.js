@@ -1,18 +1,24 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import SearchInputCtrl from "../../../controllers/search/input/SearchInputCtrl";
+import SearchList from "../list";
 
-export default function SearchResults({ setter, filteredResources }) {
+export default function SearchResults({
+  setter,
+  filteredResources,
+  resourceType,
+}) {
   return (
-    <View>
-      <SearchInputCtrl setter={setter} />
+    <View style={{ display: "flex", flexDirection: "column" }}>
+      <SearchInputCtrl setter={setter} resourceType={resourceType} />
       <View style={styles.results}>
         <View style={styles.listHead}>
-          <Text style={styles.heading}>Search Query</Text>
+          {/* <Text style={styles.heading}>Search Query</Text> */}
           <Text style={styles.subheading}>
-            Results | &nbsp;{filteredResources.length} items&nbsp;
+            Total Results | {filteredResources.length} items&nbsp;
           </Text>
         </View>
+        <SearchList resourceType={resourceType} resources={filteredResources} />
       </View>
     </View>
   );
@@ -41,6 +47,6 @@ const styles = StyleSheet.create({
   subheading: {
     color: "#333",
     fontSize: 12,
-    marginTop: 7,
+    // marginTop: 7,
   },
 });

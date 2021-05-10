@@ -9,6 +9,19 @@ const BCIT_REGION = {
   longitudeDelta: 0.01,
 };
 
+const PLACEHOLDER_LOCATION = {
+  coords: {
+    accuracy: 65,
+    altitude: 97.92,
+    altitudeAccuracy: 10,
+    heading: -1,
+    latitude: 49.25,
+    longitude: -123.0,
+    speed: -1,
+  },
+  timestamp: 1620673664559,
+};
+
 const LOCATION_SETTINGS = {
   accuracy: Location.Accuracy.Balanced,
   timeInterval: 200,
@@ -16,6 +29,7 @@ const LOCATION_SETTINGS = {
 };
 
 export default function MapCtrl({ markers, showDetail }) {
+  const stage = "development";
   const mapRef = useRef();
   const [initialRegion, setInitialRegion] = useState(BCIT_REGION);
   const [region, setRegion] = useState(null);
@@ -47,12 +61,14 @@ export default function MapCtrl({ markers, showDetail }) {
       currentLocation !== null &&
       Object.keys(currentLocation).length > 1
     ) {
-      const currentRegion_ = {
+      let currentRegion_ = {
         latitude: currentLocation.coords.latitude,
         longitude: currentLocation.coords.longitude,
         latitudeDelta: 0.01,
         longitudeDelta: 0.01,
       };
+
+      if (stage === "development") currentRegion_ = BCIT_REGION;
 
       setCurrentRegion(currentRegion_);
     }
@@ -74,6 +90,8 @@ export default function MapCtrl({ markers, showDetail }) {
 
   const pollLocation = async (settings) => {
     Location.watchPositionAsync(settings, (location) => {
+      if (stage === "development")
+        return setCurrentLocation(PLACEHOLDER_LOCATION);
       setCurrentLocation(location);
     });
   };

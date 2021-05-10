@@ -15,6 +15,10 @@ import DetailPlant from "../screens/Detail/DetailPlant";
 import ListWaypoints from "../screens/List/ListWaypoints";
 import DetailWaypoint from "../screens/Detail/DetailWaypoint";
 
+// Screens - SEARCH
+import SearchPlants from "../screens/Search/SearchPlants";
+import SearchWaypoints from "../screens/Search/SearchWaypoints";
+
 // Screens - HOME
 import Home from "../screens/Home/Home";
 
@@ -56,6 +60,14 @@ function PlantScreenNavigator() {
           ...navOptions,
         }}
       />
+      <ScreenStack.Screen
+        name="Search Plants"
+        component={SearchPlants}
+        options={{
+          headerTitle: "Search Plants",
+          ...navOptions,
+        }}
+      />
     </ScreenStack.Navigator>
   );
 }
@@ -76,6 +88,14 @@ function WaypointScreenNavigator() {
         component={DetailWaypoint}
         options={{
           headerTitle: "Waypoint",
+          ...navOptions,
+        }}
+      />
+      <ScreenStack.Screen
+        name="Search Waypoints"
+        component={SearchWaypoints}
+        options={{
+          headerTitle: "Search Waypoints",
           ...navOptions,
         }}
       />

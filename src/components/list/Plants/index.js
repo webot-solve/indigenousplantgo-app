@@ -12,7 +12,11 @@ export default function ListPlants({ plants, showDetail, locations }) {
   return (
     <View>
       <View style={styles.mapContainer}>
-        <MapCtrl markers={locations} showDetail={showDetail} />
+        <MapCtrl
+          resourceType="plants"
+          markers={locations}
+          showDetail={showDetail}
+        />
       </View>
     </View>
   );

@@ -21,6 +21,7 @@ export default function ListPlantsCtrl({ navigation }) {
 
     plants.forEach((plant) => {
       const plantName = plant.plant_name;
+      const scientificName = plant.scientific_name;
       const plantLocations = plant.locations;
       const plantId = plant._id;
 
@@ -29,6 +30,7 @@ export default function ListPlantsCtrl({ navigation }) {
           latitude: location.latitude,
           longitude: location.longitude,
           name: plantName,
+          scientificName: scientificName,
           id: plantId,
           type: "plant",
         };

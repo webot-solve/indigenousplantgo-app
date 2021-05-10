@@ -28,7 +28,7 @@ const LOCATION_SETTINGS = {
   distanceInterval: 0,
 };
 
-export default function MapCtrl({ markers, showDetail }) {
+export default function MapCtrl({ markers, showDetail, resourceType }) {
   const stage = "development";
   const mapRef = useRef();
   const [initialRegion, setInitialRegion] = useState(BCIT_REGION);
@@ -109,6 +109,7 @@ export default function MapCtrl({ markers, showDetail }) {
       showDetail={showDetail}
       currentLocation={currentLocation}
       navigateRegionToUser={navigateRegionToUser}
+      resourceType={resourceType}
     />
   );
 }

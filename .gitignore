@@ -57,3 +57,9 @@ web-build/
 **/.env*
 
 **/config.json
+
+**/Info.plist
+
+**/AndroidManifest.xml
+
+/android/app/src/main/AndroidManifest.xml

@@ -26,45 +26,13 @@ export default function index({
               onPress={() => showDetail(marker.id)}
             >
               <View style={{ minWidth: 80 }}>
-                <Text
-                  style={{
-                    width: "100%",
-                    textAlign: "center",
-                    fontWeight: "bold",
-                    fontSize: 17,
-                    color: "#333",
-                  }}
-                >
-                  {marker.name}
-                </Text>
-                <Text
-                  style={{
-                    paddingTop: 3,
-                    paddingBottom: 3,
-                    textAlign: "center",
-                    fontStyle: "italic",
-                  }}
-                >
+                <Text style={styles.calloutHead}>{marker.name}</Text>
+                <Text style={styles.calloutSubHead}>
                   {marker.scientificName}
                 </Text>
-                <View
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    flexDirection: "row",
-                    alignItems: "center",
-                  }}
-                >
+                <View style={styles.infoContainer}>
                   <InfoActive />
-                  <Text
-                    style={{
-                      textAlign: "center",
-                      color: "#0862F9",
-                      marginLeft: 3,
-                    }}
-                  >
-                    View Plant
-                  </Text>
+                  <Text style={styles.calloutCTA}>View Plant</Text>
                 </View>
               </View>
             </Callout>
@@ -147,6 +115,30 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 20,
     right: 20,
+  },
+  calloutHead: {
+    width: "100%",
+    textAlign: "center",
+    fontWeight: "bold",
+    fontSize: 17,
+    color: "#333",
+  },
+  calloutSubHead: {
+    paddingTop: 3,
+    paddingBottom: 3,
+    textAlign: "center",
+    fontStyle: "italic",
+  },
+  infoContainer: {
+    display: "flex",
+    justifyContent: "center",
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  calloutCTA: {
+    textAlign: "center",
+    color: "#0862F9",
+    marginLeft: 3,
   },
   locatorShadow: {
     height: 50,

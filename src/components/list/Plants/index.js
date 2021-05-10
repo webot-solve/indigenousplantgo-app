@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  FlatList,
-  TouchableOpacity,
-  Text,
-  View,
-  StyleSheet,
-} from "react-native";
+import { View, StyleSheet } from "react-native";
 import MapCtrl from "../../../controllers/map/MapCtrl";
 
 export default function ListPlants({ plants, showDetail, locations }) {

@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
 import { Marker, Callout } from "react-native-maps";
 import { PlantMarker } from "../../icons/Plant";
+import { WaypointMarker } from "../../icons/Waypoint";
 import { InfoActive } from "../../icons/Info";
 import { NavigatorDefault } from "../../icons/Navigator";
 
@@ -22,7 +23,7 @@ export default function index({
           <>
             <PlantMarker />
             <Callout
-              style={{ flex: 1, position: "relative", padding: 10 }}
+              style={styles.callout}
               onPress={() => showDetail(marker.id)}
             >
               <View style={{ minWidth: 80 }}>
@@ -38,6 +39,28 @@ export default function index({
             </Callout>
           </>
         );
+      case "waypoints":
+        return (
+          <>
+            <WaypointMarker />
+            <Callout
+              style={styles.callout}
+              onPress={() => showDetail(marker.id)}
+            >
+              <View style={{ minWidth: 80 }}>
+                <Text style={{ ...styles.calloutHead, marginBottom: 7 }}>
+                  {marker.name}
+                </Text>
+                <View style={styles.infoContainer}>
+                  <InfoActive />
+                  <Text style={styles.calloutCTA}>View Waypoint</Text>
+                </View>
+              </View>
+            </Callout>
+          </>
+        );
+      default:
+        break;
     }
   };
   return (
@@ -115,6 +138,12 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 20,
     right: 20,
+  },
+  callout: {
+    flex: 1,
+    position: "relative",
+    padding: 10,
+    maxWidth: 175,
   },
   calloutHead: {
     width: "100%",

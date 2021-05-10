@@ -7,8 +7,6 @@ export default function DetailWaypoint({ route, navigation }) {
   if (route && route.params && Object.keys(route.params).length > 2)
     waypoint = route.params;
 
-  console.log(waypoint);
-
   return (
     <View>
       <WaypointDetailCtrl waypoint={waypoint} navigation={navigation} />

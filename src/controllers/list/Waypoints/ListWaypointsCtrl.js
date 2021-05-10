@@ -41,10 +41,8 @@ export default function ListWaypointsCtrl({ navigation }) {
   };
 
   const showDetail = (id) => {
-    console.log(id);
     if (!id) return;
     let foundWaypoint = waypoints.filter((waypoint) => waypoint._id === id)[0];
-    console.log(foundWaypoint);
     if (!foundWaypoint) return;
 
     navigation.navigate("Waypoint Detail", foundWaypoint);

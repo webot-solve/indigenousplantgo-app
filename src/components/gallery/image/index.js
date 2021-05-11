@@ -21,7 +21,7 @@ export default function GalleryImage({
               onLoad={() => setImageLoaded(true)}
             />
           ) : null}
-          {imageLoaded ? (
+          {!imageLoaded ? (
             <View style={styles.imageOverlay}>
               <PlantDefault />
             </View>

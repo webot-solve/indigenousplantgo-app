@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import MapCtrl from "../../../controllers/map/MapCtrl";
 import { InfoActive } from "../../../icons/Info";
+import PlantBodyCtrl from "../../../controllers/detail/Plant/body/PlantBodyCtrl";
 
 export default function PlantDetail({ plant, locations }) {
   return (
@@ -32,6 +33,11 @@ export default function PlantDetail({ plant, locations }) {
         </View>
         <MapCtrl resourceType="plants" markers={locations} isDetail={true} />
       </View>
+      <View style={styles.bodyWrap}>
+        <View style={styles.bodyContainer}>
+          <PlantBodyCtrl plant={plant} />
+        </View>
+      </View>
     </View>
   );
 }
@@ -40,6 +46,20 @@ const styles = StyleSheet.create({
   mapContainer: {
     height: 230,
     position: "relative",
+  },
+  bodyWrap: {
+    height: "100%",
+    marginTop: -10,
+    backgroundColor: "dodgerblue",
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+  },
+  bodyContainer: {
+    backgroundColor: "white",
+    height: "100%",
+    marginTop: 5,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
   },
   mapBanner: {
     position: "absolute",

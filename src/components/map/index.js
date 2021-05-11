@@ -105,7 +105,7 @@ export default function index({
             ...region,
           }}
         >
-          {markers && markers.length > 1
+          {markers && markers.length > 0
             ? markers.map((marker, index) => (
                 <Marker
                   key={index}

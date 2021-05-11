@@ -5,6 +5,10 @@ export default function PlantDetailCtrl({ plant, navigation }) {
   const [locations, setLocations] = useState([]);
 
   useEffect(() => {
+    console.log(JSON.stringify(locations));
+  }, [locations]);
+
+  useEffect(() => {
     navigation.setOptions({ headerTitle: plant.plant_name });
   }, []);
 
@@ -16,11 +20,15 @@ export default function PlantDetailCtrl({ plant, navigation }) {
 
   const delegateLocations = () => {
     let locations_ = plant.locations;
+    const plantId = plant._id;
 
-    locations_.map((location) => ({
+    locations_ = locations_.map((location) => ({
       latitude: location.latitude,
       longitude: location.longitude,
-      location_name: location.location_name,
+      locationName: location.location_name,
+      name: plant.plant_name,
+      id: plantId,
+      type: "plant",
     }));
 
     setLocations(locations_);

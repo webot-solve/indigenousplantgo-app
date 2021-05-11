@@ -6,6 +6,7 @@ import { PlantMarker } from "../../icons/Plant";
 import { WaypointMarker } from "../../icons/Waypoint";
 import { InfoActive } from "../../icons/Info";
 import { NavigatorDefault } from "../../icons/Navigator";
+import { LocationActive } from "../../icons/Location";
 
 export default function index({
   region,
@@ -15,6 +16,7 @@ export default function index({
   currentLocation,
   navigateRegionToUser,
   resourceType,
+  isDetail,
 }) {
   const renderCallOut = (marker) => {
     switch (resourceType) {
@@ -24,17 +26,38 @@ export default function index({
             <PlantMarker />
             <Callout
               style={styles.callout}
-              onPress={() => showDetail(marker.id)}
+              onPress={
+                showDetail
+                  ? () => showDetail(marker.id)
+                  : () => {
+                      return;
+                    }
+              }
             >
               <View style={{ minWidth: 80 }}>
-                <Text style={styles.calloutHead}>{marker.name}</Text>
-                <Text style={styles.calloutSubHead}>
-                  {marker.scientificName}
-                </Text>
-                <View style={styles.infoContainer}>
-                  <InfoActive />
-                  <Text style={styles.calloutCTA}>View Plant</Text>
-                </View>
+                {isDetail ? (
+                  <>
+                    <Text style={styles.calloutHead}>{marker.name}</Text>
+
+                    <View style={styles.infoContainer}>
+                      <LocationActive />
+                      <Text style={styles.calloutCTA}>
+                        {marker.locationName}
+                      </Text>
+                    </View>
+                  </>
+                ) : (
+                  <>
+                    <Text style={styles.calloutHead}>{marker.name}</Text>
+                    <Text style={styles.calloutSubHead}>
+                      {marker.scientificName}
+                    </Text>
+                    <View style={styles.infoContainer}>
+                      <InfoActive />
+                      <Text style={styles.calloutCTA}>View Plant</Text>
+                    </View>
+                  </>
+                )}
               </View>
             </Callout>
           </>
@@ -45,7 +68,13 @@ export default function index({
             <WaypointMarker />
             <Callout
               style={styles.callout}
-              onPress={() => showDetail(marker.id)}
+              onPress={
+                showDetail
+                  ? () => showDetail(marker.id)
+                  : () => {
+                      return;
+                    }
+              }
             >
               <View style={{ minWidth: 80 }}>
                 <Text style={{ ...styles.calloutHead, marginBottom: 7 }}>
@@ -106,7 +135,7 @@ export default function index({
         </MapView>
       ) : null}
 
-      <View style={styles.locator}>
+      <View style={{ ...styles.locator, bottom: isDetail ? 20 : 75 }}>
         <View style={styles.locatorShadow}>
           <TouchableOpacity
             style={styles.locatorButton}
@@ -136,7 +165,6 @@ const styles = StyleSheet.create({
     height: 50,
     width: 50,
     position: "absolute",
-    bottom: 75,
     right: 20,
   },
   callout: {

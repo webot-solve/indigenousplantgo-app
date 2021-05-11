@@ -1,12 +1,31 @@
 import React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
+import { PlantDefault } from "../../../icons/Plant";
+import { WaypointDefault } from "../../../icons/Waypoint";
 
-export default function GalleryImage({ image, url }) {
+export default function GalleryImage({
+  image,
+  url,
+  resourceType,
+  setImageLoaded,
+  imageLoaded,
+}) {
   return (
     <View>
       <View>
         <View style={{ ...styles.imageContainer, width: 300 }}>
-          {url ? <Image source={{ uri: url }} style={styles.image} /> : null}
+          {url ? (
+            <Image
+              source={{ uri: url }}
+              style={styles.image}
+              onLoad={() => setImageLoaded(true)}
+            />
+          ) : null}
+          {imageLoaded ? (
+            <View style={styles.imageOverlay}>
+              <PlantDefault />
+            </View>
+          ) : null}
         </View>
       </View>
       <Text style={{ maxWidth: 300, marginTop: 3 }}>{image.caption}</Text>
@@ -37,7 +56,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     backgroundColor: "lightgrey",
-    borderRadius: 75 / 2,
+    borderRadius: 10,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",

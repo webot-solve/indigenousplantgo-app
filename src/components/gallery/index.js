@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, Text, View, FlatList } from "react-native";
 import GalleryImageCtrl from "../../controllers/gallery/image/GalleryImageCtrl";
 
-export default function Gallery({ images }) {
+export default function Gallery({ images, resourceType }) {
   return (
     <View>
       <Text style={{ ...styles.fieldTitle, paddingHorizontal: 20 }}>
@@ -15,7 +15,7 @@ export default function Gallery({ images }) {
         keyExtractor={(image) => image._id}
         data={images}
         renderItem={({ item }) => {
-          return <GalleryImageCtrl image={item} />;
+          return <GalleryImageCtrl image={item} resourceType={resourceType} />;
         }}
       />
     </View>

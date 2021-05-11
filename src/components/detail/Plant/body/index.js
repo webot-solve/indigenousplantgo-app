@@ -17,7 +17,7 @@ export default function PlantBody({ plant, topics }) {
           fields={plant.custom_fields}
         />
         {plant && plant.images && plant.images.length > 1 ? (
-          <Gallery images={plant.images} />
+          <Gallery images={plant.images} resourceType="plants" />
         ) : null}
       </ScrollView>
     </View>

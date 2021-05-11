@@ -3,7 +3,7 @@ import { createMaterialBottomTabNavigator } from "@react-navigation/material-bot
 import { createStackNavigator } from "@react-navigation/stack";
 
 // Icons
-import { CompassActive, CompassDefault } from "../icons/Compass";
+import { WaypointActive, WaypointDefault } from "../icons/Waypoint";
 import { PlantActive, PlantDefault } from "../icons/Plant";
 import { HomeActive, HomeDefault } from "../icons/Home";
 
@@ -156,7 +156,7 @@ export default function Index() {
         options={{
           ...navOptions,
           tabBarIcon: ({ focused }) => (
-            <>{focused ? <CompassActive /> : <CompassDefault />}</>
+            <>{focused ? <WaypointActive /> : <WaypointDefault />}</>
           ),
         }}
       />

@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 import { PlantDefault } from "../../../icons/Plant";
+import { WaypointDefault } from "../../../icons/Waypoint";
 
 export default function SearchItem({
   resource,
@@ -22,7 +23,11 @@ export default function SearchItem({
               />
               {!imageLoaded ? (
                 <View style={styles.imageOverlay}>
-                  <PlantDefault />
+                  {resourceType === "plants" ? (
+                    <PlantDefault />
+                  ) : (
+                    <WaypointDefault />
+                  )}
                 </View>
               ) : null}
             </View>
@@ -33,20 +38,24 @@ export default function SearchItem({
                 ...styles.placeholder,
               }}
             >
-              <PlantDefault />
+              {resourceType === "plants" ? (
+                <PlantDefault />
+              ) : (
+                <WaypointDefault />
+              )}
             </View>
           )}
         </View>
-        <View style={{ width: "90%" }}>
+        <View style={{ width: "80%" }}>
           <View style={{ marginBottom: 7 }}>
             <Text style={styles.heading}>
               {resourceType === "plants"
                 ? resource.plant_name
                 : resource.waypoint_name}
             </Text>
-            <Text style={styles.subheading}>
-              {resourceType === "plants" ? resource.scientific_name : null}
-            </Text>
+            {resourceType === "plants" ? (
+              <Text style={styles.subheading}>{resource.scientific_name}</Text>
+            ) : null}
           </View>
           <View style={styles.topicContainer}>
             {topics.map((topic, index) => (

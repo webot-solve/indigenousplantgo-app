@@ -5,7 +5,7 @@ import GalleryImageCtrl from "../../controllers/gallery/image/GalleryImageCtrl";
 export default function Gallery({ images, resourceType }) {
   return (
     <View>
-      <Text style={{ ...styles.fieldTitle, paddingHorizontal: 20 }}>
+      <Text style={{ ...styles.fieldTitle, paddingHorizontal: 15 }}>
         Gallery
       </Text>
       <FlatList

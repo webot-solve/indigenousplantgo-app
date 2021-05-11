@@ -5,10 +5,9 @@ import { getAllWaypoints } from "../../../network";
 export default function WaypointDetailCtrl({ waypoint, navigation }) {
   const [locations, setLocations] = useState([]);
   const [waypoints, setWaypoints] = useState([]);
-  const [waypoint_, setWaypoint_] = useState({});
+  const [waypoint_, setWaypoint_] = useState(waypoint);
 
   useEffect(() => {
-    setWaypoint_(waypoint);
     queryWaypoints();
   }, []);
 

@@ -11,6 +11,7 @@ import SearchItemCtrl from "../../../controllers/search/item/SearchItemCtrl";
 export default function SearchList({ resources, resourceType }) {
   return (
     <FlatList
+      contentContainerStyle={styles.list}
       keyExtractor={(resource) => resource._id}
       data={resources}
       renderItem={({ item }) => {
@@ -28,4 +29,8 @@ export default function SearchList({ resources, resourceType }) {
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  list: {
+    paddingBottom: 40,
+  },
+});

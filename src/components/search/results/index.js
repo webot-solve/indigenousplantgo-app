@@ -18,7 +18,12 @@ export default function SearchResults({
             Total Results | {filteredResources.length} items&nbsp;
           </Text>
         </View>
-        <SearchList resourceType={resourceType} resources={filteredResources} />
+        <View style={{ flex: 1, paddingBottom: 100 }}>
+          <SearchList
+            resourceType={resourceType}
+            resources={filteredResources}
+          />
+        </View>
       </View>
     </View>
   );
@@ -28,6 +33,9 @@ const styles = StyleSheet.create({
   results: {
     backgroundColor: "#f7f7f7",
     height: "100%",
+    paddingBottom: 40,
+    display: "flex",
+    flexDirection: "column",
   },
   listHead: {
     paddingTop: 20,

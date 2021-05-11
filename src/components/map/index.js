@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
     flex: 1,
     position: "relative",
     padding: 10,
-    maxWidth: 175,
+    maxWidth: 180,
   },
   calloutHead: {
     width: "100%",

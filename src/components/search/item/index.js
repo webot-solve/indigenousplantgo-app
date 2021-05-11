@@ -1,7 +1,14 @@
 import React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
+import { PlantDefault } from "../../../icons/Plant";
 
-export default function SearchItem({ resource, resourceType, topics }) {
+export default function SearchItem({
+  resource,
+  resourceType,
+  topics,
+  setImageLoaded,
+  imageLoaded,
+}) {
   return (
     <View style={styles.container}>
       <View style={styles.itemWrap}>
@@ -11,9 +18,24 @@ export default function SearchItem({ resource, resourceType, topics }) {
               <Image
                 source={{ uri: resource.images[0].image_url }}
                 style={styles.image}
+                onLoad={() => setImageLoaded(true)}
               />
+              {!imageLoaded ? (
+                <View style={styles.imageOverlay}>
+                  <PlantDefault />
+                </View>
+              ) : null}
             </View>
-          ) : null}
+          ) : (
+            <View
+              style={{
+                ...styles.imageContainer,
+                ...styles.placeholder,
+              }}
+            >
+              <PlantDefault />
+            </View>
+          )}
         </View>
         <View style={{ width: "90%" }}>
           <View style={{ marginBottom: 7 }}>
@@ -73,6 +95,26 @@ const styles = StyleSheet.create({
     width: 75,
     height: 75,
     marginRight: 20,
+    position: "relative",
+  },
+  placeholder: {
+    backgroundColor: "lightgray",
+    borderRadius: 75 / 2,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  imageOverlay: {
+    position: "absolute",
+    left: 0,
+    top: 0,
+    width: "100%",
+    height: "100%",
+    backgroundColor: "lightgrey",
+    borderRadius: 75 / 2,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   },
   image: {
     flex: 1,

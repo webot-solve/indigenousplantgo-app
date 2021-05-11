@@ -3,10 +3,10 @@ import SearchItem from "../../../components/search/item";
 
 export default function SearchItemCtrl({ resource, resourceType }) {
   const [topics, setTopics] = useState([]);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   useEffect(() => {
     concatInfo();
-    console.log(resource);
   }, [resource]);
 
   const concatInfo = () => {
@@ -29,6 +29,8 @@ export default function SearchItemCtrl({ resource, resourceType }) {
       topics={topics}
       resourceType={resourceType}
       resource={resource}
+      imageLoaded={imageLoaded}
+      setImageLoaded={setImageLoaded}
     />
   );
 }

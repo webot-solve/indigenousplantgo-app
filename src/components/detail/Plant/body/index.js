@@ -2,17 +2,23 @@ import React from "react";
 import { StyleSheet, Text, View, ScrollView } from "react-native";
 import PlantHeadCtrl from "../../../../controllers/detail/Plant/head/PlantHeadCtrl";
 import PlantDescriptions from "../descriptions";
+import Gallery from "../../../gallery";
 
 export default function PlantBody({ plant, topics }) {
   return (
-    <View style={{ paddingBottom: 220 }}>
-      <ScrollView style={styles.container}>
+    <View style={{ paddingBottom: 200 }}>
+      <ScrollView
+        style={styles.container}
+        contentContainerStyle={{ paddingBottom: 60 }}
+      >
         <PlantHeadCtrl plant={plant} topics={topics} />
         <PlantDescriptions
           description={plant.description}
           fields={plant.custom_fields}
         />
-        <Text>PlantBody</Text>
+        {plant && plant.images && plant.images.length > 1 ? (
+          <Gallery images={plant.images} />
+        ) : null}
       </ScrollView>
     </View>
   );
@@ -21,6 +27,6 @@ export default function PlantBody({ plant, topics }) {
 const styles = StyleSheet.create({
   container: {
     paddingTop: 20,
-    paddingBottom: 100,
+    paddingBottom: 0,
   },
 });

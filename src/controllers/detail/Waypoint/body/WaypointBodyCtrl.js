@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import WaypointBody from "../../../../components/detail/Waypoint/body";
 
-export default function WaypointBodyCtrl({ waypoint }) {
+export default function WaypointBodyCtrl({ waypoint, showPlant }) {
   const [topics, setTopics] = useState([]);
 
   useEffect(() => {
@@ -23,5 +23,7 @@ export default function WaypointBodyCtrl({ waypoint }) {
     setTopics(concatArray);
   };
 
-  return <WaypointBody topics={topics} waypoint={waypoint} />;
+  return (
+    <WaypointBody topics={topics} waypoint={waypoint} showPlant={showPlant} />
+  );
 }

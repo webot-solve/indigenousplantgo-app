@@ -4,7 +4,12 @@ import MapCtrl from "../../../controllers/map/MapCtrl";
 import { InfoActive } from "../../../icons/Info";
 import WaypointBodyCtrl from "../../../controllers/detail/Waypoint/body/WaypointBodyCtrl";
 
-export default function WaypointDetail({ waypoint, locations, showDetail }) {
+export default function WaypointDetail({
+  waypoint,
+  locations,
+  showDetail,
+  showPlant,
+}) {
   return (
     <View
       style={{
@@ -40,7 +45,7 @@ export default function WaypointDetail({ waypoint, locations, showDetail }) {
       </View>
       <View style={styles.bodyWrap}>
         <View style={styles.bodyContainer}>
-          <WaypointBodyCtrl waypoint={waypoint} />
+          <WaypointBodyCtrl waypoint={waypoint} showPlant={showPlant} />
         </View>
       </View>
     </View>

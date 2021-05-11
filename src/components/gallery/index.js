@@ -24,7 +24,7 @@ export default function Gallery({ images, resourceType }) {
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 20,
+    paddingHorizontal: 15,
   },
   fieldTitle: {
     fontWeight: "bold",

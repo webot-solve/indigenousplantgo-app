@@ -23,7 +23,11 @@ export default function GalleryImage({
           ) : null}
           {!imageLoaded ? (
             <View style={styles.imageOverlay}>
-              <PlantDefault />
+              {resourceType === "plants" ? (
+                <PlantDefault />
+              ) : (
+                <WaypointDefault />
+              )}
             </View>
           ) : null}
         </View>

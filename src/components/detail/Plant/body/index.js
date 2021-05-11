@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, ScrollView } from "react-native";
 import PlantHeadCtrl from "../../../../controllers/detail/Plant/head/PlantHeadCtrl";
 import PlantDescriptions from "../descriptions";
 import Gallery from "../../../gallery";
+import Videos from "../videos";
 
 export default function PlantBody({ plant, topics }) {
   return (
@@ -18,6 +19,9 @@ export default function PlantBody({ plant, topics }) {
         />
         {plant && plant.images && plant.images.length > 1 ? (
           <Gallery images={plant.images} resourceType="plants" />
+        ) : null}
+        {plant && plant.videos && plant.videos.length > 0 ? (
+          <Videos videos={plant.videos} />
         ) : null}
       </ScrollView>
     </View>

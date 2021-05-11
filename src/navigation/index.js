@@ -3,7 +3,7 @@ import { createMaterialBottomTabNavigator } from "@react-navigation/material-bot
 import { createStackNavigator } from "@react-navigation/stack";
 
 // Icons
-import { CompassActive, CompassDefault } from "../icons/Compass";
+import { WaypointActive, WaypointDefault } from "../icons/Waypoint";
 import { PlantActive, PlantDefault } from "../icons/Plant";
 import { HomeActive, HomeDefault } from "../icons/Home";
 
@@ -14,6 +14,10 @@ import DetailPlant from "../screens/Detail/DetailPlant";
 // Screens - WAYPOINTS
 import ListWaypoints from "../screens/List/ListWaypoints";
 import DetailWaypoint from "../screens/Detail/DetailWaypoint";
+
+// Screens - SEARCH
+import SearchPlants from "../screens/Search/SearchPlants";
+import SearchWaypoints from "../screens/Search/SearchWaypoints";
 
 // Screens - HOME
 import Home from "../screens/Home/Home";
@@ -56,6 +60,14 @@ function PlantScreenNavigator() {
           ...navOptions,
         }}
       />
+      <ScreenStack.Screen
+        name="Search Plants"
+        component={SearchPlants}
+        options={{
+          headerTitle: "Search Plants",
+          ...navOptions,
+        }}
+      />
     </ScreenStack.Navigator>
   );
 }
@@ -76,6 +88,14 @@ function WaypointScreenNavigator() {
         component={DetailWaypoint}
         options={{
           headerTitle: "Waypoint",
+          ...navOptions,
+        }}
+      />
+      <ScreenStack.Screen
+        name="Search Waypoints"
+        component={SearchWaypoints}
+        options={{
+          headerTitle: "Search Waypoints",
           ...navOptions,
         }}
       />
@@ -136,7 +156,7 @@ export default function Index() {
         options={{
           ...navOptions,
           tabBarIcon: ({ focused }) => (
-            <>{focused ? <CompassActive /> : <CompassDefault />}</>
+            <>{focused ? <WaypointActive /> : <WaypointDefault />}</>
           ),
         }}
       />

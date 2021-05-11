@@ -136,14 +136,14 @@ const styles = StyleSheet.create({
     height: 50,
     width: 50,
     position: "absolute",
-    bottom: 20,
+    bottom: 75,
     right: 20,
   },
   callout: {
     flex: 1,
     position: "relative",
     padding: 10,
-    maxWidth: 175,
+    maxWidth: 180,
   },
   calloutHead: {
     width: "100%",

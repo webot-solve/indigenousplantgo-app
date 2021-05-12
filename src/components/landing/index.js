@@ -139,6 +139,6 @@ const styles = StyleSheet.create({
     right: 0,
     height: "100%",
     top: "0%",
-    transform: [{ translateY: "-50%" }],
+    transform: [{ translateY: -75 }],
   },
 });

@@ -5,7 +5,7 @@ import SearchButton from "../../components/search/button";
 
 export default function ListWaypoints({ navigation }) {
   return (
-    <View style={{ flex: 1, flexDirection: "column", position: "relative;" }}>
+    <View style={{ flex: 1, flexDirection: "column" }}>
       <SearchButton navigation={navigation} resourceType="waypoints" />
       <ListWaypointsCtrl navigation={navigation} />
     </View>

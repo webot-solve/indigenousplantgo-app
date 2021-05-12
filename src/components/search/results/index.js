@@ -7,6 +7,7 @@ export default function SearchResults({
   setter,
   filteredResources,
   resourceType,
+  showDetail,
 }) {
   return (
     <View style={{ display: "flex", flexDirection: "column" }}>
@@ -20,6 +21,7 @@ export default function SearchResults({
         </View>
         <View style={{ flex: 1, paddingBottom: 100 }}>
           <SearchList
+            showDetail={showDetail}
             resourceType={resourceType}
             resources={filteredResources}
           />

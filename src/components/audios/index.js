@@ -1,24 +1,62 @@
 import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import {
+  PlayButton,
+  ResetButton,
+  PauseButton,
+  FinishButton,
+  Waves,
+} from "../../icons/Playback";
 
-export default function Audios({ soundState, handlePlayPause, stopSound }) {
+export default function Audios({
+  audio,
+  soundState,
+  handlePlayPause,
+  stopSound,
+}) {
   return (
     <View style={styles.container}>
-      <Text>Audios</Text>
+      <View
+        style={{
+          display: "flex",
+          flexDirection: "row",
+        }}
+      >
+        <Waves />
+        <Text
+          style={{
+            marginRight: 7,
+            fontSize: 17,
+            fontWeight: "bold",
+            maxWidth: 200,
+            marginLeft: 3,
+          }}
+        >
+          {audio.caption}
+        </Text>
+      </View>
       <View style={styles.controls}>
         <TouchableOpacity style={styles.control} onPress={() => stopSound()}>
-          <Text>Stahp</Text>
+          <ResetButton />
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.control}
           onPress={() => handlePlayPause()}
         >
-          {soundState.isPlaying ? (
-            <Ionicons name="ios-pause" size={48} color="#444" />
-          ) : (
-            <Ionicons name="ios-play-circle" size={48} color="#444" />
-          )}
+          <View style={styles.mainControl}>
+            {soundState.isPlaying ? (
+              <View>
+                <PauseButton />
+              </View>
+            ) : (
+              <View style={{ transform: [{ translateX: 2 }] }}>
+                <PlayButton />
+              </View>
+            )}
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.control} onPress={() => stopSound()}>
+          <FinishButton />
         </TouchableOpacity>
       </View>
     </View>
@@ -26,12 +64,29 @@ export default function Audios({ soundState, handlePlayPause, stopSound }) {
 }
 
 const styles = StyleSheet.create({
+  mainControl: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: "black",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
     paddingHorizontal: 15,
+    marginBottom: 20,
+    flexDirection: "row",
+    backgroundColor: "#f7f7f7",
+    borderColor: "lightgray",
+    borderWidth: 2,
+    borderRadius: 5,
+    padding: 7,
+    marginLeft: 15,
+    marginRight: 15,
+    justifyContent: "space-between",
+    alignItems: "center",
   },
   albumCover: {
     width: 250,
@@ -41,6 +96,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   control: {
-    margin: 20,
+    margin: 10,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   },
 });

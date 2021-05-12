@@ -12,10 +12,6 @@ export default function AudiosCtrl({ audio }) {
   const [soundState, setSoundState] = useState(initailSoundState);
 
   useEffect(() => {
-    console.log(soundState);
-  }, [soundState]);
-
-  useEffect(() => {
     (async () => {
       try {
         await Audio.setAudioModeAsync({
@@ -92,6 +88,7 @@ export default function AudiosCtrl({ audio }) {
 
   return (
     <Audios
+      audio={audio}
       soundState={soundState}
       handlePlayPause={handlePlayPause}
       stopSound={stopSound}

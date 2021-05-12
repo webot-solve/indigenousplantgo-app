@@ -36,7 +36,6 @@ export default function ListPlantsCtrl({ navigation }) {
         };
 
         locations_ = [...locations_, locationObj];
-        console.log(locationObj);
       });
     });
 

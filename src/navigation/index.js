@@ -92,6 +92,14 @@ function WaypointScreenNavigator() {
         }}
       />
       <ScreenStack.Screen
+        name="Plant Detail"
+        component={DetailPlant}
+        options={{
+          headerTitle: "Plant",
+          ...navOptions,
+        }}
+      />
+      <ScreenStack.Screen
         name="Search Waypoints"
         component={SearchWaypoints}
         options={{

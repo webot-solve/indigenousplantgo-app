@@ -118,7 +118,55 @@ function HomeScreenNavigator() {
         name="Home Page"
         component={Home}
         options={{
-          headerTitle: "Home",
+          headerTitle: "Indigenous Plants Go",
+          ...navOptions,
+        }}
+      />
+      <ScreenStack.Screen
+        name="List Waypoints"
+        component={ListWaypoints}
+        options={{
+          headerTitle: "Waypoints",
+          ...navOptions,
+        }}
+      />
+      <ScreenStack.Screen
+        name="Waypoint Detail"
+        component={DetailWaypoint}
+        options={{
+          headerTitle: "Waypoint",
+          ...navOptions,
+        }}
+      />
+      <ScreenStack.Screen
+        name="Plant Detail"
+        component={DetailPlant}
+        options={{
+          headerTitle: "Plant",
+          ...navOptions,
+        }}
+      />
+      <ScreenStack.Screen
+        name="Search Waypoints"
+        component={SearchWaypoints}
+        options={{
+          headerTitle: "Search Waypoints",
+          ...navOptions,
+        }}
+      />
+      <ScreenStack.Screen
+        name="List Plants"
+        component={ListPlants}
+        options={{
+          headerTitle: "Plants",
+          ...navOptions,
+        }}
+      />
+      <ScreenStack.Screen
+        name="Search Plants"
+        component={SearchPlants}
+        options={{
+          headerTitle: "Search Plants",
           ...navOptions,
         }}
       />

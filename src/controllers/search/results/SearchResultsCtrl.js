@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import SearchResults from "../../../components/search/results";
 import { getAllWaypoints, getAllPlants } from "../../../network";
 
-export default function SearchResultsCtrl({ resourceType }) {
+export default function SearchResultsCtrl({ resourceType, navigation }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [resources, setResources] = useState([]);
   const [filteredResources, setFilteredResources] = useState([]);
@@ -95,11 +95,29 @@ export default function SearchResultsCtrl({ resourceType }) {
     });
   };
 
+  const showDetail = (id) => {
+    if (!id) return;
+    let foundResource = resources.filter((resource) => resource._id === id)[0];
+    if (!foundResource) return;
+
+    switch (resourceType) {
+      case "plants":
+        navigation.navigate("Plant Detail", foundResource);
+        break;
+      case "waypoints":
+        navigation.navigate("Waypoint Detail", foundResource);
+        break;
+      default:
+        break;
+    }
+  };
+
   return (
     <SearchResults
       setter={syncQuery}
       filteredResources={filteredResources}
       resourceType={resourceType}
+      showDetail={showDetail}
     />
   );
 }

@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import SearchItemCtrl from "../../../controllers/search/item/SearchItemCtrl";
 
-export default function SearchList({ resources, resourceType }) {
+export default function SearchList({ resources, resourceType, showDetail }) {
   return (
     <FlatList
       contentContainerStyle={styles.list}
@@ -18,7 +18,7 @@ export default function SearchList({ resources, resourceType }) {
         return (
           <TouchableOpacity
             onPress={() => {
-              console.log("Show Detail");
+              showDetail(item._id);
             }}
           >
             <SearchItemCtrl resource={item} resourceType={resourceType} />

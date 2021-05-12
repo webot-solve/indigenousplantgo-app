@@ -1,10 +1,11 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import LandingCtrl from "../../controllers/landing/LandingCtrl";
 
-export default function Home() {
+export default function Home({ navigation }) {
   return (
-    <View>
-      <Text>Home</Text>
+    <View style={{ height: "100%" }}>
+      <LandingCtrl navigation={navigation} />
     </View>
   );
 }

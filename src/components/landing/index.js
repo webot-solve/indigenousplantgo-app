@@ -56,7 +56,9 @@ export default function Landing({ navigateToWaypoints, navigateToPlants }) {
             </View>
             <View style={{ marginLeft: 10 }}>
               <Text style={styles.heading2}>Explore Plants</Text>
-              <Text style={styles.subheading2}>to Indigenous Plants Go</Text>
+              <Text style={styles.subheading2}>
+                View plants around the campus
+              </Text>
             </View>
           </View>
         </TouchableOpacity>
@@ -74,7 +76,9 @@ export default function Landing({ navigateToWaypoints, navigateToPlants }) {
             </View>
             <View style={{ marginLeft: 10 }}>
               <Text style={styles.heading2}>Explore Waypoint</Text>
-              <Text style={styles.subheading2}>to Indigenous Plants Go</Text>
+              <Text style={styles.subheading2}>
+                View waypoints around the campus
+              </Text>
             </View>
           </View>
         </TouchableOpacity>

@@ -14,6 +14,6 @@ export default function Videos({ videos }) {
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 20,
+    paddingHorizontal: 15,
   },
 });

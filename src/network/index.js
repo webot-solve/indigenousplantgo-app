@@ -2,10 +2,13 @@ import axios from "axios";
 import config from "../../config.json";
 
 const BASE_URL = config.API.BASE_URL;
+export const CANCEL_TOKEN_SOURCE = axios.CancelToken.source();
 
 export const getAllPlants = async () => {
   try {
-    const response = await axios.get(`${BASE_URL}/plants`);
+    const response = await axios.get(`${BASE_URL}/plants`, {
+      cancelToken: CANCEL_TOKEN_SOURCE.token,
+    });
 
     return response.data;
   } catch (error) {
@@ -18,7 +21,9 @@ export const getAllPlants = async () => {
 
 export const getPlant = async (id) => {
   try {
-    const response = await axios.get(`${BASE_URL}/plants/${id}`);
+    const response = await axios.get(`${BASE_URL}/plants/${id}`, {
+      cancelToken: CANCEL_TOKEN_SOURCE.token,
+    });
 
     return response.data;
   } catch (error) {
@@ -31,7 +36,9 @@ export const getPlant = async (id) => {
 
 export const getAllWaypoints = async () => {
   try {
-    const response = await axios.get(`${BASE_URL}/waypoints`);
+    const response = await axios.get(`${BASE_URL}/waypoints`, {
+      cancelToken: CANCEL_TOKEN_SOURCE.token,
+    });
 
     return response.data;
   } catch (error) {
@@ -44,7 +51,9 @@ export const getAllWaypoints = async () => {
 
 export const getWaypoint = async (id) => {
   try {
-    const response = await axios.get(`${BASE_URL}/waypoints/${id}`);
+    const response = await axios.get(`${BASE_URL}/waypoints/${id}`, {
+      cancelToken: CANCEL_TOKEN_SOURCE.token,
+    });
 
     return response.data;
   } catch (error) {

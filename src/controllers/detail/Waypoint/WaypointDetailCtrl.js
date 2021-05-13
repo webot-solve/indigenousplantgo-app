@@ -1,16 +1,27 @@
 import React, { useState, useEffect } from "react";
 import WaypointDetail from "../../../components/detail/Waypoint";
-import { getAllWaypoints, getAllPlants } from "../../../network";
+import {
+  getAllWaypoints,
+  getAllPlants,
+  CANCEL_TOKEN_SOURCE,
+} from "../../../network";
 
 export default function WaypointDetailCtrl({ waypoint, navigation }) {
+  let isMounted = true;
   const [locations, setLocations] = useState([]);
   const [waypoints, setWaypoints] = useState([]);
   const [waypoint_, setWaypoint_] = useState(waypoint);
   const [plants, setPlants] = useState([]);
 
   useEffect(() => {
+    isMounted = true;
     queryWaypoints();
     queryPlants();
+
+    return () => {
+      isMounted = false;
+      if (CANCEL_TOKEN_SOURCE) CANCEL_TOKEN_SOURCE.cancel();
+    };
   }, []);
 
   useEffect(() => {
@@ -22,15 +33,17 @@ export default function WaypointDetailCtrl({ waypoint, navigation }) {
   }, [waypoints]);
 
   const queryWaypoints = async () => {
+    if (!isMounted) return;
     const result = await getAllWaypoints();
     if (result.error) return console.log("Error fetching waypoints");
-    setWaypoints(result);
+    if (isMounted) setWaypoints(result);
   };
 
   const queryPlants = async () => {
+    if (!isMounted) return;
     const result = await getAllPlants();
     if (result.error) return console.log("Error fetching plants");
-    setPlants(result);
+    if (isMounted) setPlants(result);
   };
 
   const delegateLocations = () => {
@@ -38,26 +51,27 @@ export default function WaypointDetailCtrl({ waypoint, navigation }) {
     if (waypoints && waypoints.length < 1) return;
     let locations_ = [];
 
-    waypoints.forEach((waypoint) => {
-      const waypointName = waypoint.waypoint_name;
-      const waypointLocations = waypoint.locations;
-      const waypointId = waypoint._id;
+    for (let i = 0; i < waypoints.length; i++) {
+      let waypointName = waypoints[i].waypoint_name,
+        waypointLocations = waypoints[i].locations,
+        waypointId = waypoints[i]._id;
 
-      waypointLocations.forEach((location) => {
+      if (waypointLocations && waypointLocations.length < 1) break;
+
+      for (let i = 0; i < waypointLocations.length; i++) {
         const locationObj = {
-          latitude: location.latitude,
-          longitude: location.longitude,
-          locationName: location.location_name,
+          latitude: waypointLocations[i].latitude,
+          longitude: waypointLocations[i].longitude,
           name: waypointName,
           id: waypointId,
           type: "waypoint",
         };
 
         locations_ = [...locations_, locationObj];
-      });
-    });
+      }
+    }
 
-    setLocations(locations_);
+    if (isMounted) setLocations(locations_);
   };
 
   const showDetail = (id) => {
@@ -65,7 +79,7 @@ export default function WaypointDetailCtrl({ waypoint, navigation }) {
     let foundWaypoint = waypoints.filter((waypoint) => waypoint._id === id)[0];
     if (!foundWaypoint) return;
 
-    setWaypoint_(foundWaypoint);
+    if (isMounted) setWaypoint_(foundWaypoint);
   };
 
   const showPlant = (id) => {

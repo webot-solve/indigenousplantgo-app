@@ -1,34 +1,43 @@
 import React, { useEffect, useState } from "react";
 import ListPlants from "../../../components/list/Plants";
-import { getAllPlants } from "../../../network";
+import { getAllPlants, CANCEL_TOKEN_SOURCE } from "../../../network";
 
 export default function ListPlantsCtrl({ navigation }) {
+  let isMounted = true;
   const [plants, setPlants] = useState([]);
   const [locations, setLocations] = useState([]);
 
   useEffect(() => {
+    isMounted = true;
     queryPlants();
+
+    return () => {
+      isMounted = false;
+      if (CANCEL_TOKEN_SOURCE && CANCEL_TOKEN_SOURCE.cancel)
+        CANCEL_TOKEN_SOURCE.cancel();
+    };
   }, []);
 
   useEffect(() => {
     delegateLocations();
   }, [plants]);
 
-  const delegateLocations = () => {
+  function delegateLocations() {
+    if (!isMounted) return;
     if (!plants) return;
     if (plants && plants.length < 1) return;
     let locations_ = [];
 
-    plants.forEach((plant) => {
-      const plantName = plant.plant_name;
-      const scientificName = plant.scientific_name;
-      const plantLocations = plant.locations;
-      const plantId = plant._id;
+    for (let i = 0; i < plants.length; i++) {
+      let plantName = plants[i].plant_name,
+        scientificName = plants[i].scientific_name,
+        plantLocations = plants[i].locations,
+        plantId = plants[i]._id;
 
-      plantLocations.forEach((location) => {
+      for (let i = 0; i < plantLocations.length; i++) {
         const locationObj = {
-          latitude: location.latitude,
-          longitude: location.longitude,
+          latitude: plantLocations[i].latitude,
+          longitude: plantLocations[i].longitude,
           name: plantName,
           scientificName: scientificName,
           id: plantId,
@@ -36,11 +45,11 @@ export default function ListPlantsCtrl({ navigation }) {
         };
 
         locations_ = [...locations_, locationObj];
-      });
-    });
+      }
+    }
 
-    setLocations(locations_);
-  };
+    if (isMounted) setLocations(locations_);
+  }
 
   const showDetail = (id) => {
     if (!id) return;
@@ -51,9 +60,10 @@ export default function ListPlantsCtrl({ navigation }) {
   };
 
   const queryPlants = async () => {
+    if (!isMounted) return;
     const result = await getAllPlants();
     if (result.error) return console.log("Error fetching plants");
-    setPlants(result);
+    if (isMounted) setPlants(result);
   };
 
   return (

@@ -72,7 +72,7 @@ The map view will allow users to navigate through BCIT's burnaby campus to ident
 1. Clone this repository to your local machine.
 
 ```
-git clone https://github.com/BCIT-SSD-2020-21/indigenous-plant-go-app.git <PATH-TO-YOUR-LOCAL-REPO>
+git clone https://github.com/BCITConstruction/indigenousplantgo-app.git<PATH-TO-YOUR-LOCAL-REPO>
 ```
 
 2. Change directory into the root folder of your newly cloned repo
@@ -81,12 +81,12 @@ git clone https://github.com/BCIT-SSD-2020-21/indigenous-plant-go-app.git <PATH-
 cd <PATH-TO-YOUR-LOCAL-REPO>
 ```
 
-3. Rename ./config-sample.json to ./config.json, and input your api end-point. This url is the production api's base end-point. Please see [server-side repository](https://github.com/BCITConstruction/indigenousplantgo-cms-server) for API documentation.
+3. Rename ./config-sample.json to ./config.json, and input your api end-point. This url is the production api's base end-point. Please see the [server-side repository](https://github.com/BCITConstruction/indigenousplantgo-cms-server) for API documentation.
 
 ```
 {
   "API": {
-    "BASE_URL": <YOUR_API_END_POINT>
+    "BASE_URL": "<YOUR-API-END-POINT>"
   }
 }
 ```

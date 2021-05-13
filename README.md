@@ -11,7 +11,7 @@ Indigenous Plant Go is a mobile application that allows BCIT Students to explore
 5. [Installation Documents](#installation)
 6. [Developer Notes](#developer-notes)
 
-### Mobile Application (Client)
+### Mobile Application (Cross-platform App)
 
 This specific repository houses the user-facing mobile application. The mobile application's core feature is the map view.
 

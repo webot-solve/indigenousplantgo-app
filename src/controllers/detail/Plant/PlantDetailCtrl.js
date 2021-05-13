@@ -5,10 +5,6 @@ export default function PlantDetailCtrl({ plant, navigation }) {
   const [locations, setLocations] = useState([]);
 
   useEffect(() => {
-    console.log(JSON.stringify(locations));
-  }, [locations]);
-
-  useEffect(() => {
     navigation.setOptions({ headerTitle: plant.plant_name });
   }, []);
 

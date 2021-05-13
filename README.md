@@ -115,7 +115,7 @@ Happy hacking!
 
 - The ability to draw poly-lines may be more managable using Open Street Maps (OSM) as the map provider instead of Google. [Documents](https://www.igismap.com/switching-between-google-maps-and-openstreetmap-in-react-native/)
 - For launching to the apple store, we recommend that a software developer investigates the requirements to launch the app in ["test flight mode"](https://developer.apple.com/testflight/)
-- Once the issues with Android (listed below under "known issues") have been addressed, we recommend that a software developer investigate the requirements to launch a "hidden" android app to the google play store. This can be done by publishing the app in "closed beta testing" mode.
+- Once the issues with Android (listed below under "known issues") have been addressed, we recommend that a software developer investigate the requirements to launch a "hidden" android app to the google play store. This can be done by publishing the app in "closed beta testing" mode. [stack exchange](https://gamedev.stackexchange.com/questions/131626/how-do-i-create-a-closed-beta-on-google-play)
 
 **Current Location**  
 In development mode, the current location is set to BCIT's location. This setting can be turned off in `./src/controllers/map/MapCtrl.js`.
@@ -123,7 +123,7 @@ In development mode, the current location is set to BCIT's location. This settin
 Change `const stage = "development"` to `const stage = "staging"`
 
 **Google API Key**  
-Although the `react-native-maps` [install documentation](https://github.com/react-native-maps/react-native-maps/blob/master/docs/installation.md) specifies that we must include the Google API Key, we did not include the API key in `AppDelegate.m`(iOS) or in `AndroidManifest.xml`(Android). [stack exchange](https://gamedev.stackexchange.com/questions/131626/how-do-i-create-a-closed-beta-on-google-play)
+Although the `react-native-maps` [install documentation](https://github.com/react-native-maps/react-native-maps/blob/master/docs/installation.md) specifies that we must include the Google API Key, we did not include the API key in `AppDelegate.m`(iOS) or in `AndroidManifest.xml`(Android).
 
 The maps still renders, and functions as expected, although we are not sure why. Perhaps this is because we aren't requesting extensive Google Maps data.
 

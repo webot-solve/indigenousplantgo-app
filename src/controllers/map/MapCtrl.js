@@ -34,6 +34,7 @@ export default function MapCtrl({
   resourceType,
   isDetail,
 }) {
+  let isMounted = true;
   const stage = "development";
   const mapRef = useRef();
   const [initialRegion, setInitialRegion] = useState(BCIT_REGION);
@@ -41,6 +42,7 @@ export default function MapCtrl({
   const [currentRegion, setCurrentRegion] = useState(null);
   const [cameraHeading, setCameraHeading] = React.useState(0);
   const [locationLoaded, setLocationLoaded] = useState(false);
+  const [expoWatchLocation, setExpoWatchLocation] = useState(null);
 
   useEffect(() => {
     delegateCurrentRegion();
@@ -53,10 +55,21 @@ export default function MapCtrl({
   }, [markers]);
 
   useEffect(() => {
+    isMounted = true;
+
     (async () => {
       await requestLocation();
       await pollLocation(LOCATION_SETTINGS);
     })();
+
+    return () => {
+      isMounted = false;
+      (async () => {
+        if (expoWatchLocation) {
+          await expoWatchLocation.watchPositionAsync().remove();
+        }
+      })();
+    };
   }, []);
 
   const delegateCurrentRegion = () => {
@@ -75,14 +88,14 @@ export default function MapCtrl({
 
       if (stage === "development") currentRegion_ = BCIT_REGION;
 
-      setCurrentRegion(currentRegion_);
+      if (isMounted) setCurrentRegion(currentRegion_);
     }
   };
 
   const requestLocation = async () => {
-    setLocationLoaded(false);
+    if (isMounted) setLocationLoaded(false);
     let { status } = await Location.requestForegroundPermissionsAsync();
-    if (status !== "granted") {
+    if (status !== "granted" && isMounted) {
       setDirective({
         error: true,
         message: "Permission to access location was denied",
@@ -91,27 +104,34 @@ export default function MapCtrl({
     }
 
     let location = await Location.getCurrentPositionAsync({});
-    setCurrentLocation(location);
-    setLocationLoaded(true);
+    if (isMounted) setCurrentLocation(location);
+    if (isMounted) setLocationLoaded(true);
   };
 
   const pollLocation = async (settings) => {
-    Location.watchPositionAsync(settings, (location) => {
-      if (stage === "development")
-        return setCurrentLocation(PLACEHOLDER_LOCATION);
-      setCurrentLocation(location);
-      updateCameraHeading();
-    });
+    const watchPosition = await Location.watchPositionAsync(
+      settings,
+      (location) => {
+        if (stage === "development" && isMounted)
+          return setCurrentLocation(PLACEHOLDER_LOCATION);
+        if (isMounted) setCurrentLocation(location);
+        updateCameraHeading();
+      }
+    );
+
+    if (isMounted) setExpoWatchLocation(watchPosition);
   };
 
   const navigateRegionToUser = () => {
     if (!currentLocation) return;
-    if (mapRef.current) mapRef.current.animateToRegion(currentRegion, 1000);
+    if (mapRef.current && isMounted)
+      mapRef.current.animateToRegion(currentRegion, 1000);
   };
 
   const updateCameraHeading = async () => {
+    if (!isMounted) return;
     const heading = await Location.getHeadingAsync();
-    setCameraHeading(heading.trueHeading);
+    if (isMounted) setCameraHeading(heading.trueHeading);
   };
 
   return (

@@ -1,14 +1,25 @@
 import React, { useState, useEffect } from "react";
 import SearchResults from "../../../components/search/results";
-import { getAllWaypoints, getAllPlants } from "../../../network";
+import {
+  getAllWaypoints,
+  getAllPlants,
+  CANCEL_TOKEN_SOURCE,
+} from "../../../network";
 
 export default function SearchResultsCtrl({ resourceType, navigation }) {
+  let isMounted = true;
   const [searchQuery, setSearchQuery] = useState("");
   const [resources, setResources] = useState([]);
   const [filteredResources, setFilteredResources] = useState([]);
 
   useEffect(() => {
+    isMounted = true;
     queryResources();
+
+    return () => {
+      isMounted = false;
+      if (CANCEL_TOKEN_SOURCE) CANCEL_TOKEN_SOURCE.cancel();
+    };
   }, []);
 
   useEffect(() => {
@@ -20,6 +31,7 @@ export default function SearchResultsCtrl({ resourceType, navigation }) {
   };
 
   const queryResources = async () => {
+    if (!isMounted) return;
     let result;
     switch (resourceType) {
       case "plants":
@@ -33,8 +45,8 @@ export default function SearchResultsCtrl({ resourceType, navigation }) {
     }
 
     if (result.error) return console.log("Error fetching resources");
-    setResources(result);
-    setFilteredResources(result);
+    if (isMounted) setResources(result);
+    if (isMounted) setFilteredResources(result);
   };
 
   const filterResources = () => {
@@ -91,7 +103,7 @@ export default function SearchResultsCtrl({ resourceType, navigation }) {
         filterId();
       });
 
-      setFilteredResources(filteredData);
+      if (isMounted) setFilteredResources(filteredData);
     });
   };
 

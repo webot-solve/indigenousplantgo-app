@@ -2,10 +2,16 @@ import React, { useState, useEffect } from "react";
 import PlantDetail from "../../../components/detail/Plant";
 
 export default function PlantDetailCtrl({ plant, navigation }) {
+  let isMounted = true;
   const [locations, setLocations] = useState([]);
 
   useEffect(() => {
+    isMounted = true;
     navigation.setOptions({ headerTitle: plant.plant_name });
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   useEffect(() => {
@@ -15,6 +21,7 @@ export default function PlantDetailCtrl({ plant, navigation }) {
   }, [plant]);
 
   const delegateLocations = () => {
+    if (!isMounted) return;
     let locations_ = plant.locations;
     const plantId = plant._id;
 
@@ -27,7 +34,7 @@ export default function PlantDetailCtrl({ plant, navigation }) {
       type: "plant",
     }));
 
-    setLocations(locations_);
+    if (isMounted) setLocations(locations_);
   };
 
   return <PlantDetail plant={plant} locations={locations} />;

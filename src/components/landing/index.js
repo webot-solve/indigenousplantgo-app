@@ -23,7 +23,7 @@ export default function Landing({ navigateToWaypoints, navigateToPlants }) {
             <HandDefault />
           </View>
           <Text style={styles.heading}>Welcome</Text>
-          <Text style={styles.subheading}>to Indigenous Plants Go</Text>
+          <Text style={styles.subheading}>to Indigenous Plant Go</Text>
         </View>
 
         <View style={styles.infoContainer}>
@@ -31,7 +31,7 @@ export default function Landing({ navigateToWaypoints, navigateToPlants }) {
           <Text style={styles.body}>“Hello” in Halq’emeylem</Text>
 
           <Text style={{ ...styles.bodyBold, marginTop: 20 }}>
-            <InfoAlternate /> About Indigenous Plants Go
+            <InfoAlternate /> About Indigenous Plant Go
           </Text>
           <Text style={styles.body}>
             This information about the plants is provided for educational
@@ -75,7 +75,7 @@ export default function Landing({ navigateToWaypoints, navigateToPlants }) {
               <LocationAlternate />
             </View>
             <View style={{ marginLeft: 10 }}>
-              <Text style={styles.heading2}>Explore Waypoint</Text>
+              <Text style={styles.heading2}>Explore Waypoints</Text>
               <Text style={styles.subheading2}>
                 View waypoints around the campus
               </Text>

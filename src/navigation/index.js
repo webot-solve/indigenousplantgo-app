@@ -118,7 +118,7 @@ function HomeScreenNavigator() {
         name="Home Page"
         component={Home}
         options={{
-          headerTitle: "Indigenous Plants Go",
+          headerTitle: "Indigenous Plant Go",
           ...navOptions,
         }}
       />

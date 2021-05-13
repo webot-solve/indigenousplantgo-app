@@ -1,5 +1,12 @@
 import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Animated,
+  Easing,
+} from "react-native";
 import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
 import { Marker, Callout } from "react-native-maps";
 import { PlantMarker } from "../../icons/Plant";
@@ -7,6 +14,8 @@ import { WaypointMarker } from "../../icons/Waypoint";
 import { InfoActive } from "../../icons/Info";
 import { NavigatorDefault } from "../../icons/Navigator";
 import { LocationActive } from "../../icons/Location";
+import { UserLocation } from "../../icons/UserLocation";
+import { Spinner } from "../../icons/Spinner";
 
 export default function index({
   region,
@@ -17,6 +26,9 @@ export default function index({
   navigateRegionToUser,
   resourceType,
   isDetail,
+  updateCameraHeading,
+  cameraHeading,
+  locationLoaded,
 }) {
   const renderCallOut = (marker) => {
     switch (resourceType) {
@@ -92,8 +104,63 @@ export default function index({
         break;
     }
   };
+  const spinValue = new Animated.Value(0);
+
+  const animation = Animated.loop(
+    Animated.timing(spinValue, {
+      toValue: 1,
+      duration: 3000,
+      easing: Easing.linear,
+      delay: false,
+      useNativeDriver: true,
+    }),
+    { iterations: 100 }
+  ).start();
+
+  const spin = spinValue.interpolate({
+    inputRange: [0, 1],
+    outputRange: ["0deg", "360deg"],
+  });
+
+  if (locationLoaded && animation) animation.stop();
+
   return (
     <View style={styles.container}>
+      {!locationLoaded ? (
+        <View
+          style={{
+            ...styles.loadingBanner,
+            flex: 1,
+            bottom: isDetail ? 20 : 70,
+          }}
+        >
+          <View
+            style={{
+              backgroundColor: "white",
+              flex: 1,
+              margin: 15,
+              paddingVertical: 7,
+              paddingHorizontal: 7,
+              borderWidth: 1,
+              borderColor: "lightgray",
+              borderRadius: 4,
+              flexDirection: "row",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Animated.View
+              style={{ transform: [{ rotate: spin }], height: 20, width: 20 }}
+            >
+              <Spinner />
+            </Animated.View>
+            <Text style={{ color: "#111", marginLeft: 7 }}>
+              Fetching current location
+            </Text>
+          </View>
+        </View>
+      ) : null}
+
       {markers &&
       typeof region === "object" &&
       Object.keys(region).length > 1 ? (
@@ -103,6 +170,18 @@ export default function index({
           style={styles.map}
           initialRegion={{
             ...region,
+          }}
+          onTouchEnd={() => {
+            updateCameraHeading();
+          }}
+          onTouchCancel={() => {
+            updateCameraHeading();
+          }}
+          onTouchStart={() => {
+            updateCameraHeading();
+          }}
+          onTouchMove={() => {
+            updateCameraHeading();
           }}
         >
           {markers && markers.length > 0
@@ -122,13 +201,20 @@ export default function index({
           typeof currentLocation === "object" &&
           Object.keys(currentLocation).length > 1 ? (
             <Marker
+              anchor={{ x: 0.5, y: 0.5 }}
               coordinate={{
                 latitude: currentLocation.coords.latitude,
                 longitude: currentLocation.coords.longitude,
               }}
             >
-              <View style={styles.markerShadow}>
-                <View style={styles.marker}></View>
+              <View
+                style={{
+                  transform: [{ rotate: `${cameraHeading}deg` }],
+                  width: 100,
+                  height: 100,
+                }}
+              >
+                <UserLocation />
               </View>
             </Marker>
           ) : null}
@@ -152,6 +238,12 @@ export default function index({
 }
 
 const styles = StyleSheet.create({
+  loadingBanner: {
+    position: "absolute",
+    bottom: 75,
+    left: 0,
+    zIndex: 4999,
+  },
   marker: {
     height: 20,
     width: 20,

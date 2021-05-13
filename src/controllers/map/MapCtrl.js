@@ -24,7 +24,7 @@ const PLACEHOLDER_LOCATION = {
 
 const LOCATION_SETTINGS = {
   accuracy: Location.Accuracy.Balanced,
-  timeInterval: 200,
+  timeInterval: 100,
   distanceInterval: 0,
 };
 
@@ -37,10 +37,10 @@ export default function MapCtrl({
   const stage = "development";
   const mapRef = useRef();
   const [initialRegion, setInitialRegion] = useState(BCIT_REGION);
-  const [region, setRegion] = useState(null);
   const [currentLocation, setCurrentLocation] = useState(null);
   const [currentRegion, setCurrentRegion] = useState(null);
-  const [directive, setDirective] = useState("");
+  const [cameraHeading, setCameraHeading] = React.useState(0);
+  const [locationLoaded, setLocationLoaded] = useState(false);
 
   useEffect(() => {
     delegateCurrentRegion();
@@ -80,6 +80,7 @@ export default function MapCtrl({
   };
 
   const requestLocation = async () => {
+    setLocationLoaded(false);
     let { status } = await Location.requestForegroundPermissionsAsync();
     if (status !== "granted") {
       setDirective({
@@ -91,6 +92,7 @@ export default function MapCtrl({
 
     let location = await Location.getCurrentPositionAsync({});
     setCurrentLocation(location);
+    setLocationLoaded(true);
   };
 
   const pollLocation = async (settings) => {
@@ -98,12 +100,18 @@ export default function MapCtrl({
       if (stage === "development")
         return setCurrentLocation(PLACEHOLDER_LOCATION);
       setCurrentLocation(location);
+      updateCameraHeading();
     });
   };
 
   const navigateRegionToUser = () => {
     if (!currentLocation) return;
     if (mapRef.current) mapRef.current.animateToRegion(currentRegion, 1000);
+  };
+
+  const updateCameraHeading = async () => {
+    const heading = await Location.getHeadingAsync();
+    setCameraHeading(heading.trueHeading);
   };
 
   return (
@@ -115,7 +123,10 @@ export default function MapCtrl({
       isDetail={isDetail}
       currentLocation={currentLocation}
       navigateRegionToUser={navigateRegionToUser}
+      updateCameraHeading={updateCameraHeading}
       resourceType={resourceType}
+      cameraHeading={cameraHeading}
+      locationLoaded={locationLoaded}
     />
   );
 }

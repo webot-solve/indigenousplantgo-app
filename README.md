@@ -36,6 +36,8 @@ The map view will allow users to navigate through BCIT's burnaby campus to ident
 - "Wayfinding" - will allow the user to select any custom marker, and the system will draw a polyline or path way from the user's current location, to the selected marker.
 - Apply more prominent visual "branding" across all the screens
 - Styling enhancements on the Android version
+- Deploy to google play store (Android)
+- Deploy to app store (iOS)
 
 ### Technology Stack
 
@@ -79,7 +81,7 @@ git clone https://github.com/BCIT-SSD-2020-21/indigenous-plant-go-app.git <PATH-
 cd <PATH-TO-YOUR-LOCAL-REPO>
 ```
 
-3. Rename ./config-sample.json to ./config.json, and input your api end-point.
+3. Rename ./config-sample.json to ./config.json, and input your api end-point. This url is the production api's base end-point. Please see [server-side repository](https://github.com/BCITConstruction/indigenousplantgo-cms-server) for API documentation.
 
 ```
 {
@@ -109,13 +111,19 @@ Happy hacking!
 
 ### Developer Notes
 
+**Considerations**
+
+- The ability to draw poly-lines may be more managable using Open Street Maps (OSM) as the map provider instead of Google. [Documents](https://www.igismap.com/switching-between-google-maps-and-openstreetmap-in-react-native/)
+- For launching to the apple store, we recommend that a software developer investigates the requirements to launch the app in ["test flight mode"](https://developer.apple.com/testflight/)
+- Once the issues with Android (listed below under "known issues") have been addressed, we recommend that a software developer investigate the requirements to launch a "hidden" android app to the google play store. This can be done by publishing the app in "closed beta testing" mode.
+
 **Current Location**  
 In development mode, the current location is set to BCIT's location. This setting can be turned off in `./src/controllers/map/MapCtrl.js`.
 
 Change `const stage = "development"` to `const stage = "staging"`
 
 **Google API Key**  
-Although the `react-native-maps` [install documentation](https://github.com/react-native-maps/react-native-maps/blob/master/docs/installation.md) specifies that we must include the Google API Key, we did not include the API key in `AppDelegate.m`(iOS) or in `AndroidManifest.xml`(Android).
+Although the `react-native-maps` [install documentation](https://github.com/react-native-maps/react-native-maps/blob/master/docs/installation.md) specifies that we must include the Google API Key, we did not include the API key in `AppDelegate.m`(iOS) or in `AndroidManifest.xml`(Android). [stack exchange](https://gamedev.stackexchange.com/questions/131626/how-do-i-create-a-closed-beta-on-google-play)
 
 The maps still renders, and functions as expected, although we are not sure why. Perhaps this is because we aren't requesting extensive Google Maps data.
 

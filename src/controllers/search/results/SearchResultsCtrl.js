@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from "react";
 import SearchResults from "../../../components/search/results";
-import {
-  getAllWaypoints,
-  getAllPlants,
-  CANCEL_TOKEN_SOURCE,
-} from "../../../network";
+import { getAllWaypoints, getAllPlants } from "../../../network";
 
 export default function SearchResultsCtrl({ resourceType, navigation }) {
   let isMounted = true;
@@ -18,7 +14,6 @@ export default function SearchResultsCtrl({ resourceType, navigation }) {
 
     return () => {
       isMounted = false;
-      if (CANCEL_TOKEN_SOURCE) CANCEL_TOKEN_SOURCE.cancel();
     };
   }, []);
 

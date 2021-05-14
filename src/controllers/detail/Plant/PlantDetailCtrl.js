@@ -21,7 +21,6 @@ export default function PlantDetailCtrl({ plant, navigation }) {
   }, [plant]);
 
   const delegateLocations = () => {
-    if (!isMounted) return;
     let locations_ = plant.locations;
     const plantId = plant._id;
 

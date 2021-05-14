@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from "react";
 import WaypointDetail from "../../../components/detail/Waypoint";
-import {
-  getAllWaypoints,
-  getAllPlants,
-  CANCEL_TOKEN_SOURCE,
-} from "../../../network";
+import { getAllWaypoints, getAllPlants } from "../../../network";
 
 export default function WaypointDetailCtrl({ waypoint, navigation }) {
   let isMounted = true;
@@ -20,7 +16,6 @@ export default function WaypointDetailCtrl({ waypoint, navigation }) {
 
     return () => {
       isMounted = false;
-      if (CANCEL_TOKEN_SOURCE) CANCEL_TOKEN_SOURCE.cancel();
     };
   }, []);
 

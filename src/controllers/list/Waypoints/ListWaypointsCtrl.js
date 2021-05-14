@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ListWaypoints from "../../../components/list/Waypoints";
-import { getAllWaypoints, CANCEL_TOKEN_SOURCE } from "../../../network";
+import { getAllWaypoints } from "../../../network";
 
 export default function ListWaypointsCtrl({ navigation }) {
   let isMounted = true;
@@ -13,7 +13,6 @@ export default function ListWaypointsCtrl({ navigation }) {
 
     return () => {
       isMounted = false;
-      if (CANCEL_TOKEN_SOURCE) CANCEL_TOKEN_SOURCE.cancel();
     };
   }, []);
 

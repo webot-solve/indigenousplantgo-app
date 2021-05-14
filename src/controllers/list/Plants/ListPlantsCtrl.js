@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ListPlants from "../../../components/list/Plants";
-import { getAllPlants, CANCEL_TOKEN_SOURCE } from "../../../network";
+import { getAllPlants } from "../../../network";
 
 export default function ListPlantsCtrl({ navigation }) {
   let isMounted = true;
@@ -13,8 +13,6 @@ export default function ListPlantsCtrl({ navigation }) {
 
     return () => {
       isMounted = false;
-      if (CANCEL_TOKEN_SOURCE && CANCEL_TOKEN_SOURCE.cancel)
-        CANCEL_TOKEN_SOURCE.cancel();
     };
   }, []);
 

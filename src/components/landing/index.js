@@ -14,7 +14,11 @@ import { LocationAlternate } from "../../icons/Location";
 
 const backgroundImage = require("./eagle__background.png");
 
-export default function Landing({ navigateToWaypoints, navigateToPlants }) {
+export default function Landing({ 
+  navigateToWaypoints, 
+  navigateToPlants,
+  navigateToTours,
+}) {
   return (
     <View style={styles.container}>
       <ImageBackground style={styles.image} source={backgroundImage}>
@@ -78,6 +82,27 @@ export default function Landing({ navigateToWaypoints, navigateToPlants }) {
               <Text style={styles.heading2}>Explore Waypoints</Text>
               <Text style={styles.subheading2}>
                 View waypoints around the campus
+              </Text>
+            </View>
+          </View>
+        </TouchableOpacity>
+
+        {/* TOURS  */}
+        <TouchableOpacity
+          onPress={() => navigateToTours()}
+          style={styles.button}
+        >
+          <View style={styles.iconContainer}>
+            <WaypointAlternate />
+          </View>
+          <View style={{ display: "flex", flexDirection: "row" }}>
+            <View Style={styles.pinContainer}>
+              <LocationAlternate />
+            </View>
+            <View style={{ marginLeft: 10 }}>
+              <Text style={styles.heading2}>Explore Tours</Text>
+              <Text style={styles.subheading2}>
+                View tours around the campus
               </Text>
             </View>
           </View>

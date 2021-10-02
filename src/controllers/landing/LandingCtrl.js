@@ -10,10 +10,15 @@ export default function LandingCtrl({ navigation }) {
     navigation.navigate("List Waypoints");
   };
 
+  const navigateToTours = () => {
+    navigation.navigate("List Tours");
+  };
+
   return (
     <Landing
       navigateToPlants={navigateToPlants}
       navigateToWaypoints={navigateToWaypoints}
+      navigateToTours={navigateToTours}
     />
   );
 }

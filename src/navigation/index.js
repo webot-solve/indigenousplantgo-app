@@ -22,6 +22,10 @@ import SearchWaypoints from "../screens/Search/SearchWaypoints";
 // Screens - HOME
 import Home from "../screens/Home/Home";
 
+// Screens - TOURS
+import ListTours from "../screens/List/ListTours"
+
+
 // Navigation Stacks
 const BottomTab = createMaterialBottomTabNavigator();
 const ScreenStack = createStackNavigator();
@@ -170,6 +174,17 @@ function HomeScreenNavigator() {
           ...navOptions,
         }}
       />
+
+      {/* Tours  */}
+      <ScreenStack.Screen
+        name="List Tours"
+        component={ListTours}
+        options={{
+          headerTitle: "List Tours",
+          ...navOptions,
+        }}
+      />
+
     </ScreenStack.Navigator>
   );
 }

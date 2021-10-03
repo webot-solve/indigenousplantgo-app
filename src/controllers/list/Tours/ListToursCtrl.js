@@ -24,19 +24,19 @@ export default function ListToursCtrl({navigation}){
     if (isMounted) setTours(result);
   };
 
-  // const showDetail = (id) => {
-  //   if (!id) return;
-  //   let foundTour = tours.filter((tour) => tour._id === id)[0];
-  //   if (!foundTour) return;
+  const showDetail = (id) => {
+    if (!id) return;
+    let foundTour = tours.filter((tour) => tour._id === id)[0];
+    if (!foundTour) return;
 
-  //   navigation.navigate("Tour Detail", foundTour);
-  // };
+    navigation.navigate("Tour Detail", foundTour);
+  };
 
   return (
     <View style={{ flex: 1, flexDirection: "column" }}>
       <ListTours 
         tours={tours}
-        // showDetail={showDetail}
+        showDetail={showDetail}
       />
     </View>
   )

@@ -9,7 +9,7 @@ import {
 import SearchItemCtrl from "../../../controllers/search/item/SearchItemCtrl";
 
 
-export default function ListTours({tours}){
+export default function ListTours({tours, showDetail}){
   return(
     <View>
       <FlatList
@@ -20,7 +20,7 @@ export default function ListTours({tours}){
         return (
           <TouchableOpacity
             onPress={() => {
-              // showDetail(item._id);
+              showDetail(item._id);
               console.log('button pressed')
             }}
           >

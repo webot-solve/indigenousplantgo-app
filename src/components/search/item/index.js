@@ -10,6 +10,19 @@ export default function SearchItem({
   setImageLoaded,
   imageLoaded,
 }) {
+
+  let resourceName;
+  if(resourceType == "plants"){
+    resourceName = resource.plant_name
+  }
+  if(resourceType == "waypoints"){
+    resourceName = resource.waypoint_name
+  }
+  if(resourceType == "tours"){
+    resourceName = resource.tour_name
+  }
+
+
   return (
     <View style={styles.container}>
       <View style={styles.itemWrap}>
@@ -49,9 +62,7 @@ export default function SearchItem({
         <View style={{ width: "80%" }}>
           <View style={{ marginBottom: 7 }}>
             <Text style={styles.heading}>
-              {resourceType === "plants"
-                ? resource.plant_name
-                : resource.waypoint_name}
+                {resourceName}
             </Text>
             {resourceType === "plants" ? (
               <Text style={styles.subheading}>{resource.scientific_name}</Text>

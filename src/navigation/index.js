@@ -24,7 +24,8 @@ import SearchTours from "../screens/Search/SearchTours";
 import Home from "../screens/Home/Home";
 
 // Screens - TOURS
-import ListTours from "../screens/List/ListTours"
+import ListTours from "../screens/List/ListTours";
+import DetailTour from "../screens/Detail/DetailTour";
 
 
 // Navigation Stacks
@@ -193,6 +194,15 @@ function HomeScreenNavigator() {
           ...navOptions,
         }}
       />
+      <ScreenStack.Screen
+        name="Tour Detail"
+        component={DetailTour}
+        options={{
+          headerTitle: "Tour",
+          ...navOptions,
+        }}
+      />
+      
 
     </ScreenStack.Navigator>
   );

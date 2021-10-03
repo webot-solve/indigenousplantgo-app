@@ -62,9 +62,7 @@ export const getWaypoint = async (id) => {
 
 export const getAllTours = async () => {
   try {
-    console.log(BASE_URL)
     const response = await axios.get(`${BASE_URL}/tours`);
-    console.log(response)
 
     return response.data;
   } catch (error) {

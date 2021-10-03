@@ -1,11 +1,19 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, ScrollView, } from "react-native";
+import TourHeadCtrl from "../../../controllers/detail/Tour/head/TourHeadCtrl"
 
-export default function TourDetail({ tour}) {
+export default function TourDetail({ tour, topics}) {
+
   return (
    <View>
-     <Text>Hello from TourDetail Component</Text>
-     <Text>{tour.tour_name}</Text>
+     <ScrollView
+        style={styles.container}
+        contentContainerStyle={{ paddingBottom: 60 }}
+      >
+        <TourHeadCtrl tour={tour} topics={topics} />
+
+      </ScrollView>
+     
    </View>
   );
 }

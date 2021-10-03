@@ -11,7 +11,6 @@ export default function DetailTour({ route, navigation }) {
 
   return (
     <View>
-      <Text>Hello from Detail Screen Tour</Text>
       <TourDetailCtrl tour={tour}/>
     </View>
   );

@@ -3,18 +3,31 @@ import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { SearchDefault } from "../../../icons/Search";
 
 export default function SearchButton({ navigation, resourceType }) {
+
+  const navigateTo = () => {
+    if(resourceType === "plants"){
+      navigation.navigate("Search Plants");
+    }
+    if(resourceType === "waypoints"){
+      navigation.navigate("Search Waypoints");
+    }
+    if(resourceType === "tours"){
+      navigation.navigate("Search Tours");
+    }
+  }
+
   return (
     <View style={styles.container}>
       <View>
         <TouchableOpacity
-          onPress={
-            resourceType === "plants"
-              ? () => {
-                  navigation.navigate("Search Plants");
-                }
-              : () => {
-                  navigation.navigate("Search Waypoints");
-                }
+          onPress={navigateTo
+            // resourceType === "plants"
+            //   ? () => {
+            //       navigation.navigate("Search Plants");
+            //     }
+            //   : () => {
+            //       navigation.navigate("Search Waypoints");
+            //     }
           }
           style={{ ...styles.button, flexDirection: "row", padding: 3 }}
         >

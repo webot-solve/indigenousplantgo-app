@@ -18,6 +18,7 @@ import DetailWaypoint from "../screens/Detail/DetailWaypoint";
 // Screens - SEARCH
 import SearchPlants from "../screens/Search/SearchPlants";
 import SearchWaypoints from "../screens/Search/SearchWaypoints";
+import SearchTours from "../screens/Search/SearchTours";
 
 // Screens - HOME
 import Home from "../screens/Home/Home";
@@ -181,6 +182,14 @@ function HomeScreenNavigator() {
         component={ListTours}
         options={{
           headerTitle: "List Tours",
+          ...navOptions,
+        }}
+      />
+       <ScreenStack.Screen
+        name="Search Tours"
+        component={SearchTours}
+        options={{
+          headerTitle: "Search Tours",
           ...navOptions,
         }}
       />

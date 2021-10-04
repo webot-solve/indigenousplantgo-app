@@ -19,6 +19,7 @@ export default function Landing({
   navigateToWaypoints, 
   navigateToPlants,
   navigateToTours,
+  navigateToLearnMore
 }) {
   return (
     <ScrollView style={styles.container}>
@@ -112,7 +113,7 @@ export default function Landing({
 
          {/* TOURS  */}
          <TouchableOpacity
-          onPress={() => navigateToTours()}
+          onPress={() => navigateToLearnMore()}
           style={{...styles.button}}
         >
           <View style={styles.iconContainer}>

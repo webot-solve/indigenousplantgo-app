@@ -11,6 +11,14 @@ export default function TourDetailCtrl({ tour, navigation }) {
     concatInfo();
   }, [tour]);
 
+  useEffect(() => {
+    isMounted = true;
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
   const concatInfo = () => {
     if (!isMounted) return;
     if (!tour) return;

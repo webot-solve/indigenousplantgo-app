@@ -5,6 +5,7 @@ import {
   View,
   ImageBackground,
   TouchableOpacity,
+  ScrollView,
 } from "react-native";
 import { HandDefault } from "../../icons/Hand";
 import { InfoAlternate } from "../../icons/Info";
@@ -20,7 +21,7 @@ export default function Landing({
   navigateToTours,
 }) {
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <ImageBackground style={styles.image} source={backgroundImage}>
         <View style={styles.button}>
           <View style={styles.iconContainer}>
@@ -47,6 +48,7 @@ export default function Landing({
             Explore the Campus
           </Text>
         </View>
+
         <TouchableOpacity
           onPress={() => navigateToPlants()}
           style={{ ...styles.button, marginBottom: 0 }}
@@ -69,7 +71,7 @@ export default function Landing({
 
         <TouchableOpacity
           onPress={() => navigateToWaypoints()}
-          style={styles.button}
+          style={{ ...styles.button, marginBottom: 0 }}
         >
           <View style={styles.iconContainer}>
             <WaypointAlternate />
@@ -90,7 +92,7 @@ export default function Landing({
         {/* TOURS  */}
         <TouchableOpacity
           onPress={() => navigateToTours()}
-          style={styles.button}
+          style={{ ...styles.button, marginBottom: 0 }}
         >
           <View style={styles.iconContainer}>
             <WaypointAlternate />
@@ -107,8 +109,30 @@ export default function Landing({
             </View>
           </View>
         </TouchableOpacity>
+
+         {/* TOURS  */}
+         <TouchableOpacity
+          onPress={() => navigateToTours()}
+          style={{...styles.button}}
+        >
+          <View style={styles.iconContainer}>
+            <WaypointAlternate />
+          </View>
+          <View style={{ display: "flex", flexDirection: "row" }}>
+            <View Style={styles.pinContainer}>
+              <LocationAlternate />
+            </View>
+            <View style={{ marginLeft: 10 }}>
+              <Text style={styles.heading2}>Learn More</Text>
+              {/* <Text style={styles.subheading2}>
+                View tours around the campus
+              </Text> */}
+            </View>
+          </View>
+        </TouchableOpacity>
+
       </ImageBackground>
-    </View>
+    </ScrollView>
   );
 }
 

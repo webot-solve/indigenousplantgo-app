@@ -29,6 +29,7 @@ import DetailTour from "../screens/Detail/DetailTour";
 
 // Screens - LEARN MORE
 import ListLearnMore from "../screens/List/ListLearnMore"
+import DetailLearnMore from "../screens/Detail/DetailLearnMore"
 
 // Navigation Stacks
 const BottomTab = createMaterialBottomTabNavigator();
@@ -211,6 +212,14 @@ function HomeScreenNavigator() {
         component={ListLearnMore}
         options={{
           headerTitle: "List LearnMore",
+          ...navOptions,
+        }}
+      />
+      <ScreenStack.Screen
+        name="LearnMore Detail"
+        component={DetailLearnMore}
+        options={{
+          headerTitle: "Learn More",
           ...navOptions,
         }}
       />

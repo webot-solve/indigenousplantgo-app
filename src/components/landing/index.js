@@ -8,10 +8,13 @@ import {
   ScrollView,
 } from "react-native";
 import { HandDefault } from "../../icons/Hand";
-import { InfoAlternate } from "../../icons/Info";
+import { InfoAlternate, InfoAlternateB } from "../../icons/Info";
 import { PlantAlternate } from "../../icons/Plant";
 import { WaypointAlternate } from "../../icons/Waypoint";
 import { LocationAlternate } from "../../icons/Location";
+import { TourAlternate, TourAlternateB} from "../../icons/Tour";
+import { LearnMoreAlternate } from "../../icons/LearnMore";
+
 
 const backgroundImage = require("./eagle__background.png");
 
@@ -96,11 +99,13 @@ export default function Landing({
           style={{ ...styles.button, marginBottom: 0 }}
         >
           <View style={styles.iconContainer}>
+            <TourAlternate />
+
             <WaypointAlternate />
           </View>
           <View style={{ display: "flex", flexDirection: "row" }}>
             <View Style={styles.pinContainer}>
-              <LocationAlternate />
+              <TourAlternateB />
             </View>
             <View style={{ marginLeft: 10 }}>
               <Text style={styles.heading2}>Explore Tours</Text>
@@ -117,17 +122,17 @@ export default function Landing({
           style={{...styles.button}}
         >
           <View style={styles.iconContainer}>
-            <WaypointAlternate />
+            <LearnMoreAlternate />
           </View>
           <View style={{ display: "flex", flexDirection: "row" }}>
             <View Style={styles.pinContainer}>
-              <LocationAlternate />
+              <InfoAlternateB />
             </View>
             <View style={{ marginLeft: 10 }}>
               <Text style={styles.heading2}>Learn More</Text>
-              {/* <Text style={styles.subheading2}>
-                View tours around the campus
-              </Text> */}
+              <Text style={styles.subheading2}>
+                Find out more
+              </Text>
             </View>
           </View>
         </TouchableOpacity>

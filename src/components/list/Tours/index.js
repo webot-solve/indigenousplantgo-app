@@ -17,18 +17,17 @@ export default function ListTours({tours, showDetail}){
         keyExtractor={(tour) => tour._id}
         data={tours}
         renderItem={({ item }) => {
-        return (
-          <TouchableOpacity
-            onPress={() => {
-              showDetail(item._id);
-              console.log('button pressed')
-            }}
-          >
-            <SearchItemCtrl resource={item} resourceType={"tours"} />
-          </TouchableOpacity>
-        );
-      }}
-    />
+          return (
+            <TouchableOpacity
+              onPress={() => {
+                showDetail(item._id);
+              }}
+            >
+              <SearchItemCtrl resource={item} resourceType={"tours"} />
+            </TouchableOpacity>
+          );
+       }}
+      />
       
     </View>
   )

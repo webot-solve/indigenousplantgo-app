@@ -54,25 +54,24 @@ export default function TourDetail({
           </>
         ): null} */}
 
-        { tour && tour.plants ? (
+        { tour && tour.plants && tour.plants.length > 0 ? (
            <>
            <Text style={styles.fieldTitle}>Plants</Text>
            {tour.plants.map((plant,index) => (
              <Pressable 
               key={index}
               onPress={()=>{
-                console.log("Text is pressed:", plant._id)
                 showDetailPlant(plant._id);
               }}
               >
-                <Text style={styles.fieldBody} >{plant.plant_name}</Text>
+                <Text style={styles.fieldBodyLink} >{plant.plant_name}</Text>
              </Pressable>
            
            ))}
          </>
         ): null}
 
-        { tour && tour.waypoints ? (
+        { tour && tour.waypoints && tour.waypoints.length  ? (
            <>
            <Text style={styles.fieldTitle}>Waypoints</Text>
            {tour.waypoints.map((waypoint,index) => (
@@ -83,7 +82,7 @@ export default function TourDetail({
                 showDetailWaypoint(waypoint._id);
               }}
               >
-                <Text style={styles.fieldBody} >{waypoint.waypoint_name}</Text>
+                <Text style={styles.fieldBodyLink} >{waypoint.waypoint_name}</Text>
              </Pressable>
            
            ))}
@@ -166,6 +165,11 @@ const styles = StyleSheet.create({
   fieldBody: {
     lineHeight: 20,
     paddingHorizontal: 15,
+  },
+  fieldBodyLink: {
+    lineHeight: 20,
+    paddingHorizontal: 15,
+    color: "blue"
   },
    list: {
     paddingBottom: 40,

@@ -11,7 +11,10 @@ export default function DetailTour({ route, navigation }) {
 
   return (
     <View>
-      <TourDetailCtrl tour={tour}/>
+      <TourDetailCtrl 
+        tour={tour}
+        navigation={navigation}
+      />
     </View>
   );
 }

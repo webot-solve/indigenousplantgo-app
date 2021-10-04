@@ -1,13 +1,25 @@
 import React from "react";
-import { StyleSheet, Text, View, ScrollView, } from "react-native";
+import { 
+  StyleSheet, 
+  Text, 
+  View, 
+  ScrollView, 
+  Pressable
+} from "react-native";
+
 import TourHeadCtrl from "../../../controllers/detail/Tour/head/TourHeadCtrl";
 import TourDescriptions from "./descriptions";
 import Gallery from "../../gallery";
 import Videos from "../Tour/videos";
 import AudiosCtrl from "../../../controllers/audios/AudiosCtrl";
 
-export default function TourDetail({ tour, topics}) {
-  console.log(tour.waypoints.length)
+export default function TourDetail({ 
+  tour, 
+  topics, 
+  showDetailPlant,
+  showDetailWaypoint
+
+}) {
   return (
    <View>
      <ScrollView
@@ -33,15 +45,51 @@ export default function TourDetail({ tour, topics}) {
             ))}
           </>
         ) : null}
-        { tour && tour.plants ? (
+        {/* { tour && tour.plants ? (
           <>
             <Text style={styles.fieldTitle}>Plants</Text>
             {tour.plants.map((plant,index) => (
               <Text style={styles.fieldBody} key={index}>{plant.plant_name}</Text>
             ))}
           </>
+        ): null} */}
+
+        { tour && tour.plants ? (
+           <>
+           <Text style={styles.fieldTitle}>Plants TEST</Text>
+           {tour.plants.map((plant,index) => (
+             <Pressable 
+              key={index}
+              onPress={()=>{
+                console.log("Text is pressed:", plant._id)
+                showDetailPlant(plant._id);
+              }}
+              >
+                <Text style={styles.fieldBody} >{plant.plant_name}</Text>
+             </Pressable>
+           
+           ))}
+         </>
         ): null}
-         { tour && tour.waypoints ? (
+
+        { tour && tour.waypoints ? (
+           <>
+           <Text style={styles.fieldTitle}>Waypoints TEST</Text>
+           {tour.waypoints.map((waypoint,index) => (
+             <Pressable 
+              key={index}
+              onPress={()=>{
+                console.log("Text is pressed:", waypoint._id)
+                showDetailWaypoint(waypoint._id);
+              }}
+              >
+                <Text style={styles.fieldBody} >{waypoint.waypoint_name}</Text>
+             </Pressable>
+           
+           ))}
+         </>
+        ): null}
+         {/* { tour && tour.waypoints ? (
           <>
             <Text style={styles.fieldTitle}>Waypoints</Text>
           {tour.waypoints.map((waypoint,index) => (
@@ -50,7 +98,7 @@ export default function TourDetail({ tour, topics}) {
           </>
          )
           : null
-        }
+        } */}
       </ScrollView>
      
    </View>
@@ -119,4 +167,10 @@ const styles = StyleSheet.create({
     lineHeight: 20,
     paddingHorizontal: 15,
   },
+   list: {
+    paddingBottom: 40,
+  },
+  fieldButton:{
+    color: "white"
+  }
 });

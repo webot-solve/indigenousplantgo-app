@@ -21,6 +21,9 @@ export default function SearchItem({
   if(resourceType == "tours"){
     resourceName = resource.tour_name
   }
+  if(resourceType == "learnMores"){
+    resourceName = resource.learn_more_title
+  }
 
 
   return (

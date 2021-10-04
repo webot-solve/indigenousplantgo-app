@@ -6,10 +6,30 @@ import {
   FlatList,
   TouchableOpacity,
 } from "react-native";
+import SearchItemCtrl from "../../../controllers/search/item/SearchItemCtrl";
 
-export default function ListLearnMore(){
+export default function ListLearnMore({learnMores, showDetail}){
   return (
-    <Text>Hello from Component List Learn More</Text>
+    <View>
+    <FlatList
+      contentContainerStyle={styles.list}
+      keyExtractor={(learnMore) => learnMore._id}
+      data={learnMores}
+      renderItem={({ item }) => {
+        return (
+          <TouchableOpacity
+            onPress={() => {
+              showDetail(item._id);
+              console.log("button pressed AJP")
+            }}
+          >
+            <SearchItemCtrl resource={item} resourceType={"learnMores"} />
+          </TouchableOpacity>
+        );
+     }}
+    />
+    
+  </View>
   );
 }
 

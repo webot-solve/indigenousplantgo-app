@@ -73,3 +73,17 @@ export const getAllTours = async () => {
     };
   }
 };
+
+export const getAllLearnMore = async () => {
+  try {
+    const response = await axios.get(`${BASE_URL}/learn_more`);
+
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    console.log(error.response);
+    return {
+      error: error.response,
+    };
+  }
+};

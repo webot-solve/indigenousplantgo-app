@@ -56,7 +56,7 @@ export default function TourDetail({
 
         { tour && tour.plants ? (
            <>
-           <Text style={styles.fieldTitle}>Plants TEST</Text>
+           <Text style={styles.fieldTitle}>Plants</Text>
            {tour.plants.map((plant,index) => (
              <Pressable 
               key={index}
@@ -74,7 +74,7 @@ export default function TourDetail({
 
         { tour && tour.waypoints ? (
            <>
-           <Text style={styles.fieldTitle}>Waypoints TEST</Text>
+           <Text style={styles.fieldTitle}>Waypoints</Text>
            {tour.waypoints.map((waypoint,index) => (
              <Pressable 
               key={index}

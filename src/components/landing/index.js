@@ -5,6 +5,7 @@ import {
   View,
   ImageBackground,
   TouchableOpacity,
+  ScrollView,
 } from "react-native";
 import { HandDefault } from "../../icons/Hand";
 import { InfoAlternate } from "../../icons/Info";
@@ -14,9 +15,14 @@ import { LocationAlternate } from "../../icons/Location";
 
 const backgroundImage = require("./eagle__background.png");
 
-export default function Landing({ navigateToWaypoints, navigateToPlants }) {
+export default function Landing({ 
+  navigateToWaypoints, 
+  navigateToPlants,
+  navigateToTours,
+  navigateToLearnMore
+}) {
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <ImageBackground style={styles.image} source={backgroundImage}>
         <View style={styles.button}>
           <View style={styles.iconContainer}>
@@ -43,6 +49,7 @@ export default function Landing({ navigateToWaypoints, navigateToPlants }) {
             Explore the Campus
           </Text>
         </View>
+
         <TouchableOpacity
           onPress={() => navigateToPlants()}
           style={{ ...styles.button, marginBottom: 0 }}
@@ -65,7 +72,7 @@ export default function Landing({ navigateToWaypoints, navigateToPlants }) {
 
         <TouchableOpacity
           onPress={() => navigateToWaypoints()}
-          style={styles.button}
+          style={{ ...styles.button, marginBottom: 0 }}
         >
           <View style={styles.iconContainer}>
             <WaypointAlternate />
@@ -82,8 +89,51 @@ export default function Landing({ navigateToWaypoints, navigateToPlants }) {
             </View>
           </View>
         </TouchableOpacity>
+
+        {/* TOURS  */}
+        <TouchableOpacity
+          onPress={() => navigateToTours()}
+          style={{ ...styles.button, marginBottom: 0 }}
+        >
+          <View style={styles.iconContainer}>
+            <WaypointAlternate />
+          </View>
+          <View style={{ display: "flex", flexDirection: "row" }}>
+            <View Style={styles.pinContainer}>
+              <LocationAlternate />
+            </View>
+            <View style={{ marginLeft: 10 }}>
+              <Text style={styles.heading2}>Explore Tours</Text>
+              <Text style={styles.subheading2}>
+                View tours around the campus
+              </Text>
+            </View>
+          </View>
+        </TouchableOpacity>
+
+         {/* TOURS  */}
+         <TouchableOpacity
+          onPress={() => navigateToLearnMore()}
+          style={{...styles.button}}
+        >
+          <View style={styles.iconContainer}>
+            <WaypointAlternate />
+          </View>
+          <View style={{ display: "flex", flexDirection: "row" }}>
+            <View Style={styles.pinContainer}>
+              <LocationAlternate />
+            </View>
+            <View style={{ marginLeft: 10 }}>
+              <Text style={styles.heading2}>Learn More</Text>
+              {/* <Text style={styles.subheading2}>
+                View tours around the campus
+              </Text> */}
+            </View>
+          </View>
+        </TouchableOpacity>
+
       </ImageBackground>
-    </View>
+    </ScrollView>
   );
 }
 

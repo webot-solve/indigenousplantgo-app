@@ -18,9 +18,18 @@ import DetailWaypoint from "../screens/Detail/DetailWaypoint";
 // Screens - SEARCH
 import SearchPlants from "../screens/Search/SearchPlants";
 import SearchWaypoints from "../screens/Search/SearchWaypoints";
+import SearchTours from "../screens/Search/SearchTours";
 
 // Screens - HOME
 import Home from "../screens/Home/Home";
+
+// Screens - TOURS
+import ListTours from "../screens/List/ListTours";
+import DetailTour from "../screens/Detail/DetailTour";
+
+// Screens - LEARN MORE
+import ListLearnMore from "../screens/List/ListLearnMore"
+import DetailLearnMore from "../screens/Detail/DetailLearnMore"
 
 // Navigation Stacks
 const BottomTab = createMaterialBottomTabNavigator();
@@ -170,6 +179,52 @@ function HomeScreenNavigator() {
           ...navOptions,
         }}
       />
+
+      {/* Tours  */}
+      <ScreenStack.Screen
+        name="List Tours"
+        component={ListTours}
+        options={{
+          headerTitle: "List Tours",
+          ...navOptions,
+        }}
+      />
+       <ScreenStack.Screen
+        name="Search Tours"
+        component={SearchTours}
+        options={{
+          headerTitle: "Search Tours",
+          ...navOptions,
+        }}
+      />
+      <ScreenStack.Screen
+        name="Tour Detail"
+        component={DetailTour}
+        options={{
+          headerTitle: "Tour",
+          ...navOptions,
+        }}
+      />
+
+      {/* Learn More */}
+      <ScreenStack.Screen
+        name="List LearnMore"
+        component={ListLearnMore}
+        options={{
+          headerTitle: "List LearnMore",
+          ...navOptions,
+        }}
+      />
+      <ScreenStack.Screen
+        name="LearnMore Detail"
+        component={DetailLearnMore}
+        options={{
+          headerTitle: "Learn More",
+          ...navOptions,
+        }}
+      />
+      
+
     </ScreenStack.Navigator>
   );
 }

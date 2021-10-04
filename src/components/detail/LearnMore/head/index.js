@@ -1,49 +1,29 @@
+
 import React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
-import { PlantDefault } from "../../../icons/Plant";
-import { WaypointDefault } from "../../../icons/Waypoint";
+import { PlantDefault } from "../../../../icons/Plant";
 
-export default function SearchItem({
-  resource,
-  resourceType,
+export default function LearnMoreHead({
+  learnMore,
   topics,
   setImageLoaded,
   imageLoaded,
-}) {
-
-  let resourceName;
-  if(resourceType == "plants"){
-    resourceName = resource.plant_name
-  }
-  if(resourceType == "waypoints"){
-    resourceName = resource.waypoint_name
-  }
-  if(resourceType == "tours"){
-    resourceName = resource.tour_name
-  }
-  if(resourceType == "learnMores"){
-    resourceName = resource.learn_more_title
-  }
-
-
-  return (
+}){
+  console.log("Zebra", learnMore)
+  return(
     <View style={styles.container}>
       <View style={styles.itemWrap}>
         <View>
-          {resource.images && resource.images.length > 0 ? (
+        {learnMore.images && learnMore.images.length > 0 ? (
             <View style={styles.imageContainer}>
               <Image
-                source={{ uri: resource.images[0].image_url }}
+                source={{ uri: learnMore.images[0].image_url }}
                 style={styles.image}
                 onLoad={() => setImageLoaded(true)}
               />
               {!imageLoaded ? (
                 <View style={styles.imageOverlay}>
-                  {resourceType === "plants" ? (
-                    <PlantDefault />
-                  ) : (
-                    <WaypointDefault />
-                  )}
+                  <PlantDefault />
                 </View>
               ) : null}
             </View>
@@ -54,42 +34,24 @@ export default function SearchItem({
                 ...styles.placeholder,
               }}
             >
-              {resourceType === "plants" ? (
-                <PlantDefault />
-              ) : (
-                <WaypointDefault />
-              )}
+              <PlantDefault />
             </View>
           )}
-        </View>
-        <View style={{ width: "80%" }}>
-          <View style={{ marginBottom: 7 }}>
-            <Text style={styles.heading}>
-                {resourceName}
-            </Text>
-            {resourceType === "plants" ? (
-              <Text style={styles.subheading}>{resource.scientific_name}</Text>
-            ) : null}
-          </View>
-          <View style={styles.topicContainer}>
-            {topics.map((topic, index) => (
-              <View style={styles.topic} key={index}>
-                <Text>{topic}</Text>
-              </View>
-            ))}
-          </View>
         </View>
       </View>
     </View>
   );
 }
 
+
+
+
+
+
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 20,
-    paddingVertical: 15,
-    borderBottomColor: "lightgrey",
-    borderBottomWidth: 1,
+    paddingHorizontal: 10,
+    paddingBottom: 15,
   },
   heading: {
     fontWeight: "bold",
@@ -115,14 +77,14 @@ const styles = StyleSheet.create({
     borderRadius: 2,
   },
   imageContainer: {
-    width: 75,
-    height: 75,
+    width: 100,
+    height: 100,
     marginRight: 20,
     position: "relative",
   },
   placeholder: {
     backgroundColor: "lightgray",
-    borderRadius: 75 / 2,
+    borderRadius: 100 / 2,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -134,14 +96,14 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     backgroundColor: "lightgrey",
-    borderRadius: 75 / 2,
+    borderRadius: 100 / 2,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
   },
   image: {
     flex: 1,
-    borderRadius: 75 / 2,
+    borderRadius: 100 / 2,
     overflow: "hidden",
   },
   itemWrap: {

@@ -72,6 +72,25 @@ export default function MapCtrl({
     };
   }, []);
 
+  const requestLocation = async () => {
+    if (isMounted) setLocationLoaded(false);
+    let { status } = await Location.requestForegroundPermissionsAsync();
+    console.log(status)
+   
+    if (status !== "granted" && isMounted) {
+      setDirective({
+        error: true,
+        message: "Permission to access location was denied",
+      });
+      return;
+    }
+
+    let location = await Location.getCurrentPositionAsync({accuracy:Location.Accuracy.Lowest});
+
+    if (isMounted) setCurrentLocation(location);
+    if (isMounted) setLocationLoaded(true);
+  };
+
   const delegateCurrentRegion = () => {
     if (
       currentLocation &&
@@ -92,21 +111,7 @@ export default function MapCtrl({
     }
   };
 
-  const requestLocation = async () => {
-    if (isMounted) setLocationLoaded(false);
-    let { status } = await Location.requestForegroundPermissionsAsync();
-    if (status !== "granted" && isMounted) {
-      setDirective({
-        error: true,
-        message: "Permission to access location was denied",
-      });
-      return;
-    }
-
-    let location = await Location.getCurrentPositionAsync({});
-    if (isMounted) setCurrentLocation(location);
-    if (isMounted) setLocationLoaded(true);
-  };
+  
 
   const pollLocation = async (settings) => {
     const watchPosition = await Location.watchPositionAsync(
@@ -114,6 +119,7 @@ export default function MapCtrl({
       (location) => {
         if (stage === "development" && isMounted)
           return setCurrentLocation(PLACEHOLDER_LOCATION);
+          // return setCurrentLocation(location);
         if (isMounted) setCurrentLocation(location);
         updateCameraHeading();
       }

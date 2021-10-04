@@ -6,8 +6,12 @@ import {
   ScrollView, 
   Pressable
 } from "react-native";
-
 import LearnMoreHeadCtrl from "../../../controllers/detail/LearnMore/head/LearnMoreHeadCtrl";
+import LearnMoreDescriptions from "./descriptions";
+import Gallery from "../../gallery";
+import Videos from "../LearnMore/videos";
+import AudiosCtrl from "../../../controllers/audios/AudiosCtrl";
+
 
 export default function LearnMoreDetail({
   learnMore,
@@ -21,6 +25,27 @@ export default function LearnMoreDetail({
         contentContainerStyle={{ paddingBottom: 60 }}
       >
       <LearnMoreHeadCtrl learnMore={learnMore} topics={topics}/>
+      <LearnMoreDescriptions
+        description={learnMore.description}
+        fields={learnMore.custom_fields}
+      />
+      {learnMore && learnMore.images && learnMore.images.length > 1 ? (
+        <Gallery images={learnMore.images} resourceType="waypoints" />
+      ) : null}
+
+      {learnMore && learnMore.videos && learnMore.videos.length > 0 ? (
+        <Videos videos={learnMore.videos} />
+      ) : null}
+
+      {learnMore && learnMore.audio_files && learnMore.audio_files.length > 0 ? (
+          <>
+            <Text style={styles.fieldTitle}>Audio Snippets</Text>
+            {learnMore.audio_files.map((audio, index) => (
+              <AudiosCtrl key={index} audio={audio} />
+            ))}
+          </>
+      ) : null}
+
       </ScrollView>
     </View>
   );

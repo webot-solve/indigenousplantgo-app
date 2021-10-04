@@ -55,11 +55,6 @@ export default function LearnMoreHead({
   );
 }
 
-
-
-
-
-
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 10,

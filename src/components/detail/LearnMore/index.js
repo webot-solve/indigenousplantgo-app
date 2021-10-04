@@ -33,9 +33,9 @@ export default function LearnMoreDetail({
         <Gallery images={learnMore.images} resourceType="waypoints" />
       ) : null}
 
-      {learnMore && learnMore.videos && learnMore.videos.length > 0 ? (
+      {/* {learnMore && learnMore.videos && learnMore.videos.length > 0 ? (
         <Videos videos={learnMore.videos} />
-      ) : null}
+      ) : null} */}
 
       {learnMore && learnMore.audio_files && learnMore.audio_files.length > 0 ? (
           <>

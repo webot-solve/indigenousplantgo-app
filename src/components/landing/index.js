@@ -31,20 +31,20 @@ export default function Landing({
           <View style={styles.iconContainer}>
             <HandDefault />
           </View>
-          <Text style={styles.heading}>Welcome</Text>
-          <Text style={styles.subheading}>to Indigenous Plant Go</Text>
+          <Text style={styles.heading}>Welcome to</Text>
+          <Text style={styles.subheading}>Indigenous Plant Go</Text>
         </View>
 
         <View style={styles.infoContainer}>
           <Text style={{ ...styles.heading, color: "#000" }}>Ey' Swayel!</Text>
           <Text style={styles.body}>“Hello” in Halq’emeylem</Text>
 
-          <Text style={{ ...styles.bodyBold, marginTop: 20 }}>
-            <InfoAlternate /> About Indigenous Plant Go
+          <Text style={{ ...styles.bodyBold, marginTop: 20, fontSize: 18 }}>
+            <InfoAlternate /> Disclaimer
           </Text>
           <Text style={styles.body}>
             This information about the plants is provided for educational
-            purposes only, plants should not be eaten or prepared based on this
+            purposes only. Plants should not be eaten or prepared based on this
             information.
           </Text>
 
@@ -168,9 +168,9 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   heading: {
-    fontSize: 30,
+    fontSize: 20,
     color: "white",
-    fontWeight: "bold",
+   
   },
   heading2: {
     fontSize: 24,
@@ -179,7 +179,8 @@ const styles = StyleSheet.create({
   },
   subheading: {
     color: "white",
-    fontSize: 17,
+    fontSize: 30,
+    fontWeight: "bold",
   },
   subheading2: {
     color: "white",

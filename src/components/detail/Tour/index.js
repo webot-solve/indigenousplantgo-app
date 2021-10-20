@@ -17,9 +17,12 @@ export default function TourDetail({
   tour, 
   topics, 
   showDetailPlant,
-  showDetailWaypoint
+  showDetailWaypoint, 
+  showVideo
 
 }) {
+
+  console.log(tour.videos)
   return (
    <View>
      <ScrollView
@@ -34,9 +37,22 @@ export default function TourDetail({
         {tour && tour.images && tour.images.length > 1 ? (
           <Gallery images={tour.images} resourceType="waypoints" />
         ) : null}
-        {/* {tour && tour.videos && tour.videos.length > 0 ? (
-          <Videos videos={tour.videos} />
-        ) : null} */}
+        { tour.videos && tour.videos.length > 0 
+          ? <>
+              <Text style={styles.fieldTitle}>Videos</Text>
+              {tour.videos.map((video,index) => (
+                <Pressable 
+                  key={index}
+                  onPress={()=>{
+                    showVideo(video._id);
+                  }}
+                >
+                  <Text style={styles.fieldBody} key={index}>{video.caption}</Text>
+                </Pressable>
+              ))}
+            </>
+          : null
+        }
         {tour && tour.audio_files && tour.audio_files.length > 0 ? (
           <>
             <Text style={styles.fieldTitle}>Audio Snippets</Text>
@@ -45,15 +61,6 @@ export default function TourDetail({
             ))}
           </>
         ) : null}
-        {/* { tour && tour.plants ? (
-          <>
-            <Text style={styles.fieldTitle}>Plants</Text>
-            {tour.plants.map((plant,index) => (
-              <Text style={styles.fieldBody} key={index}>{plant.plant_name}</Text>
-            ))}
-          </>
-        ): null} */}
-
         { tour && tour.plants && tour.plants.length > 0 ? (
            <>
            <Text style={styles.fieldTitle}>Plants</Text>
@@ -88,16 +95,6 @@ export default function TourDetail({
            ))}
          </>
         ): null}
-         {/* { tour && tour.waypoints ? (
-          <>
-            <Text style={styles.fieldTitle}>Waypoints</Text>
-          {tour.waypoints.map((waypoint,index) => (
-            <Text style={styles.fieldBody} key={index}>{waypoint.waypoint_name}</Text>
-          ))}
-          </>
-         )
-          : null
-        } */}
       </ScrollView>
      
    </View>

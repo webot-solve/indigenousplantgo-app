@@ -52,6 +52,14 @@ export default function TourDetailCtrl({ tour, navigation }) {
     navigation.navigate("Waypoint Detail", foundWaypoint);
   };
 
+  const showVideo = (id) => {
+    if (!id) return;
+    let foundVideo = tour.videos.filter( video => video._id === id)[0];
+    if (!foundVideo) return;
+
+    navigation.navigate("Video Detail", foundVideo);
+  };
+
 
   return (
     <View>
@@ -60,6 +68,7 @@ export default function TourDetailCtrl({ tour, navigation }) {
         topics={topics}
         showDetailPlant ={showDetailPlant}
         showDetailWaypoint ={showDetailWaypoint}
+        showVideo = {showVideo}
       />
     </View>
   );

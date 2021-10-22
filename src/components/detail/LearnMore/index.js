@@ -18,6 +18,7 @@ export default function LearnMoreDetail({
   topics
 }){
 
+
   return(
     <View>
       <ScrollView
@@ -25,6 +26,7 @@ export default function LearnMoreDetail({
         contentContainerStyle={{ paddingBottom: 60 }}
       >
       <LearnMoreHeadCtrl learnMore={learnMore} topics={topics}/>
+
       <LearnMoreDescriptions
         description={learnMore.description}
         fields={learnMore.custom_fields}

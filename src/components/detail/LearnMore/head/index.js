@@ -38,6 +38,7 @@ export default function LearnMoreHead({
             </View>
           )}
         </View>
+
         <View style={{ width: "80%" }}>
           <View style={{ marginBottom: 7 }}>
             <Text style={styles.heading}>{learnMore.learn_more_title}</Text>
@@ -54,6 +55,7 @@ export default function LearnMoreHead({
     </View>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {

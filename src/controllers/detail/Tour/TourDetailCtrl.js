@@ -39,7 +39,6 @@ export default function TourDetailCtrl({ tour, navigation }) {
   const showDetailPlant = (id) => {
     if (!id) return;
     let foundPlant = tour.plants.filter( plant => plant._id === id)[0];
-    console.log(foundPlant)
     if (!foundPlant) return;
 
     navigation.navigate("Plant Detail", foundPlant);
@@ -48,10 +47,17 @@ export default function TourDetailCtrl({ tour, navigation }) {
   const showDetailWaypoint = (id) => {
     if (!id) return;
     let foundWaypoint = tour.waypoints.filter( waypoint => waypoint._id === id)[0];
-    console.log(foundWaypoint)
     if (!foundWaypoint) return;
 
     navigation.navigate("Waypoint Detail", foundWaypoint);
+  };
+
+  const showVideo = (id) => {
+    if (!id) return;
+    let foundVideo = tour.videos.filter( video => video._id === id)[0];
+    if (!foundVideo) return;
+
+    navigation.navigate("Video Detail", foundVideo);
   };
 
 
@@ -62,6 +68,7 @@ export default function TourDetailCtrl({ tour, navigation }) {
         topics={topics}
         showDetailPlant ={showDetailPlant}
         showDetailWaypoint ={showDetailWaypoint}
+        showVideo = {showVideo}
       />
     </View>
   );

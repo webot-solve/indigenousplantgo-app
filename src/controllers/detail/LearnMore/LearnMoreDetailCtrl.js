@@ -36,7 +36,6 @@ export default function LearnMoreDetailCtrl({learnMore}){
 
   return(
     <View>
-      <Text>Hello from Controller: Detail LearnMore</Text>
       <LearnMoreDetail
         learnMore={learnMore}
         topics={topics}

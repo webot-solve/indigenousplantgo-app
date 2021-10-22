@@ -38,14 +38,23 @@ export default function LearnMoreHead({
             </View>
           )}
         </View>
+
+        <View style={{ width: "80%" }}>
+          <View style={{ marginBottom: 7 }}>
+            <Text style={styles.heading}>{learnMore.learn_more_title}</Text>
+          </View>
+          <View style={styles.topicContainer}>
+            {topics.map((topic, index) => (
+              <View style={styles.topic} key={index}>
+                <Text>{topic}</Text>
+              </View>
+            ))}
+          </View>
+        </View>
       </View>
     </View>
   );
 }
-
-
-
-
 
 
 const styles = StyleSheet.create({

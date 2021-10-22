@@ -11,9 +11,9 @@ export default function DetailTour({ route, navigation }) {
 
   return (
     <View>
-      <Text>Hello from Screens: LearnMore</Text>
       <LearnMoreDetailCtrl
         learnMore={learnMore}
+        navigation={navigation}
       />    
     </View>
   );

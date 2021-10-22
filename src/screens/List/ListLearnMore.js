@@ -6,7 +6,6 @@ import ListLearnMoreCtrl from "../../controllers/list/LearnMore/ListLearnMoreCtr
 export default function ListLearnMore({ navigation }) {
   return (
     <View style={{ flex: 1, flexDirection: "column" }}>
-      <SearchButton navigation={navigation} resourceType="tours" />
       <ListLearnMoreCtrl navigation={navigation}/>
     </View>
   );

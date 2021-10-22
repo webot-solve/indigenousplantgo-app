@@ -17,9 +17,12 @@ export default function TourDetail({
   tour, 
   topics, 
   showDetailPlant,
-  showDetailWaypoint
+  showDetailWaypoint, 
+  showVideo
 
 }) {
+
+  console.log(tour.videos)
   return (
    <View>
      <ScrollView
@@ -34,9 +37,22 @@ export default function TourDetail({
         {tour && tour.images && tour.images.length > 1 ? (
           <Gallery images={tour.images} resourceType="waypoints" />
         ) : null}
-        {/* {tour && tour.videos && tour.videos.length > 0 ? (
-          <Videos videos={tour.videos} />
-        ) : null} */}
+        { tour.videos && tour.videos.length > 0 
+          ? <>
+              <Text style={styles.fieldTitle}>Videos</Text>
+              {tour.videos.map((video,index) => (
+                <Pressable 
+                  key={index}
+                  onPress={()=>{
+                    showVideo(video._id);
+                  }}
+                >
+                  <Text style={styles.fieldBody} key={index}>{video.caption}</Text>
+                </Pressable>
+              ))}
+            </>
+          : null
+        }
         {tour && tour.audio_files && tour.audio_files.length > 0 ? (
           <>
             <Text style={styles.fieldTitle}>Audio Snippets</Text>
@@ -45,36 +61,26 @@ export default function TourDetail({
             ))}
           </>
         ) : null}
-        {/* { tour && tour.plants ? (
-          <>
-            <Text style={styles.fieldTitle}>Plants</Text>
-            {tour.plants.map((plant,index) => (
-              <Text style={styles.fieldBody} key={index}>{plant.plant_name}</Text>
-            ))}
-          </>
-        ): null} */}
-
-        { tour && tour.plants ? (
+        { tour && tour.plants && tour.plants.length > 0 ? (
            <>
-           <Text style={styles.fieldTitle}>Plants TEST</Text>
+           <Text style={styles.fieldTitle}>Plants</Text>
            {tour.plants.map((plant,index) => (
              <Pressable 
               key={index}
               onPress={()=>{
-                console.log("Text is pressed:", plant._id)
                 showDetailPlant(plant._id);
               }}
               >
-                <Text style={styles.fieldBody} >{plant.plant_name}</Text>
+                <Text style={styles.fieldBodyLink} >{plant.plant_name}</Text>
              </Pressable>
            
            ))}
          </>
         ): null}
 
-        { tour && tour.waypoints ? (
+        { tour && tour.waypoints && tour.waypoints.length  ? (
            <>
-           <Text style={styles.fieldTitle}>Waypoints TEST</Text>
+           <Text style={styles.fieldTitle}>Waypoints</Text>
            {tour.waypoints.map((waypoint,index) => (
              <Pressable 
               key={index}
@@ -83,22 +89,12 @@ export default function TourDetail({
                 showDetailWaypoint(waypoint._id);
               }}
               >
-                <Text style={styles.fieldBody} >{waypoint.waypoint_name}</Text>
+                <Text style={styles.fieldBodyLink} >{waypoint.waypoint_name}</Text>
              </Pressable>
            
            ))}
          </>
         ): null}
-         {/* { tour && tour.waypoints ? (
-          <>
-            <Text style={styles.fieldTitle}>Waypoints</Text>
-          {tour.waypoints.map((waypoint,index) => (
-            <Text style={styles.fieldBody} key={index}>{waypoint.waypoint_name}</Text>
-          ))}
-          </>
-         )
-          : null
-        } */}
       </ScrollView>
      
    </View>
@@ -166,6 +162,11 @@ const styles = StyleSheet.create({
   fieldBody: {
     lineHeight: 20,
     paddingHorizontal: 15,
+  },
+  fieldBodyLink: {
+    lineHeight: 20,
+    paddingHorizontal: 15,
+    color: "blue"
   },
    list: {
     paddingBottom: 40,
